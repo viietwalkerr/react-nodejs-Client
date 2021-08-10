@@ -17,6 +17,7 @@ import Test from './pages/Test';
 import { AuthContext } from './helpers/AuthContext';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import { baseUrl } from './helpers/const';
 
 
 function scrollFunction()
@@ -47,8 +48,11 @@ function App() {
     status: false,
   });
 
+  ;
+
   useEffect(() => {
-    axios.get('http://localhost:3001/auth/token'||'https://react-nodejs-illumin8.herokuapp.com/auth/token', {
+    // axios.get('http://localhost:3001/auth/token'||'https://react-nodejs-illumin8.herokuapp.com/auth/token', {
+    axios.get(baseUrl +"auth/token", {
       headers: {
         accessToken: localStorage.getItem("accessToken")
       }

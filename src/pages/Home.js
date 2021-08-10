@@ -5,6 +5,7 @@ import { useHistory, Link } from 'react-router-dom';
 import * as AiIcons from 'react-icons/ai';
 // import { FaIcons } from 'react-icons/fa';
 // import { AuthContext } from "../helpers/AuthContext";
+import { baseUrl } from '../helpers/const';
 
 
 function Home() {
@@ -21,9 +22,10 @@ function Home() {
         if (!localStorage.getItem("accessToken")) {
             history.push("/login");
         } else {
-            axios.get("http://localhost:3001/posts"||
-            "https://react-nodejs-illumin8.herokuapp.com/posts", { headers: { accessToken: localStorage.getItem("accessToken")}}).then((response) => {
-                // console.log(response);
+            // axios.get("http://localhost:3001/posts"||
+            // "https://react-nodejs-illumin8.herokuapp.com/posts", { headers: { accessToken: localStorage.getItem("accessToken")}}).then((response) => {
+            axios.get(baseUrl + "posts", { headers: { accessToken: localStorage.getItem("accessToken")}}).then((response) => {
+            // console.log(response);
                 // contains 2 arrays, listsOfPosts and likedPosts
                 setListOfPosts(response.data.listOfPosts);
                 setLikedPosts(response.data.likedPosts.map((like) => {
@@ -36,8 +38,9 @@ function Home() {
 
     const likePost = (postId) => {
         axios.post(
-            "http://localhost:3001/likes"||
-            "https://react-nodejs-illumin8.herokuapp.com/likes", 
+            baseUrl + "likes",
+            // "http://localhost:3001/likes"||
+            // "https://react-nodejs-illumin8.herokuapp.com/likes", 
             { PostId: postId }, 
             { headers: { accessToken: localStorage.getItem("accessToken")}}
         ).then((response) => {

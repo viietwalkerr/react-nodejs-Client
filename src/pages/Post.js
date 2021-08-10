@@ -3,7 +3,7 @@ import { useParams, useHistory } from 'react-router-dom';
 import axios from 'axios';
 import { AuthContext } from "../helpers/AuthContext";
 import * as AiIcons from 'react-icons/ai';
-
+import { baseUrl } from '../helpers/const';
 
 
 function Post() {
@@ -20,8 +20,10 @@ function Post() {
     useEffect(() => {
 
         axios.get(
-            `http://localhost:3001/posts/byId/${id}` || 
-            `https://react-nodejs-illumin8.herokuapp.com/posts/byId${id}`).then((response) => {
+            baseUrl + `posts/byId/${id}`,
+            // `http://localhost:3001/posts/byId/${id}` || 
+            // `https://react-nodejs-illumin8.herokuapp.com/posts/byId${id}`
+            ).then((response) => {
         // console.log(response);
         // setListOfPosts(response.data);
             setPostObject(response.data);

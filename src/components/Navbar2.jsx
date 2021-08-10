@@ -9,7 +9,7 @@ import './Navbar.css';
 // import { IconContext } from 'react-icons';
 import { AuthContext } from '../helpers/AuthContext';
 import axios from 'axios';
-
+import { baseUrl } from '../helpers/const';
 
 
 
@@ -20,9 +20,12 @@ function Navbar2() {
     const { setAuthState} = useContext(AuthContext);
 
     useEffect(() => {
-        axios.get('http://localhost:3001/auth/token', {
-            headers: { accessToken: localStorage.getItem("accessToken")
-        }
+        axios.get(
+            baseUrl + "auth/token",
+            // 'http://localhost:3001/auth/token', 
+            {
+                headers: { accessToken: localStorage.getItem("accessToken")
+            }
         }, [])
         .then((response) => {
             if (response.data.error) {

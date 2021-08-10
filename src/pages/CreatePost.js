@@ -5,6 +5,7 @@ import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import * as FaIcons from 'react-icons/fa';
 // import { AuthContext } from "../helpers/AuthContext";
+import { baseUrl } from '../helpers/const';
 
 
 function CreatePost() {
@@ -33,8 +34,11 @@ function CreatePost() {
 
         // console.log(data);
         // Use headers to pass username
-        axios.post("http://localhost:3001/posts"||
-        "https://react-nodejs-illumin8.herokuapp.com/posts", data, {
+        axios.post(
+            baseUrl + "posts",
+            // "http://localhost:3001/posts"||
+        // "https://react-nodejs-illumin8.herokuapp.com/posts", 
+        data, {
              headers: { accessToken: localStorage.getItem("accessToken") },
     }).then((response) => {
         // console.log(response);

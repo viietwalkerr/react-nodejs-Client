@@ -3,6 +3,7 @@ import axios from 'axios';
 import * as FaIcons from 'react-icons/fa';
 import { useHistory/*, Redirect */} from 'react-router-dom';
 import { AuthContext } from '../helpers/AuthContext';
+import { baseUrl } from '../helpers/const';
 
 function Login() {
 
@@ -20,8 +21,11 @@ function Login() {
 
     const login = () => {
         const data = {username: username, password: password}; //creating an object
-        axios.post("http://localhost:3001/auth/login" ||
-        "https://react-nodejs-illumin8.herokuapp.com/auth/login", data).then((response) => {
+        axios.post(
+            baseUrl + "auth/login",
+            // "http://localhost:3001/auth/login" ||
+        // "https://react-nodejs-illumin8.herokuapp.com/auth/login", 
+        data).then((response) => {
             console.log(response.data)
             if (response.data.error){
                 alert(response.data.error);

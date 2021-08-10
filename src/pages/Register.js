@@ -4,6 +4,7 @@ import * as Yup from "yup";
 import axios from "axios";
 import * as FaIcons from 'react-icons/fa';
 import * as AiIcons from 'react-icons/ai';
+import { baseUrl } from '../helpers/const';
 
 function Register() {
 
@@ -25,8 +26,11 @@ function Register() {
     });
 
     const onSubmit = (data) => {
-        axios.post("http://localhost:3001/auth"||
-        "https://react-nodejs-illumin8.herokuapp.com/auth", data).then(()=> {
+        axios.post(
+            baseUrl +"auth",
+            // "http://localhost:3001/auth"||
+        // "https://react-nodejs-illumin8.herokuapp.com/auth", 
+        data).then(()=> {
             console.log(data);
         });
     };

@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import * as FaIcons from 'react-icons/fa';
 import axios from 'axios';
+import { baseUrl } from '../helpers/const';
 
 function ChangePassword() {
 
@@ -9,8 +10,9 @@ function ChangePassword() {
 
     const changePassword = () => {
         axios.put(
-            "http://localhost:3001/auth/changepassword"||
-            "https://react-nodejs-illumin8.herokuapp.com/auth/changepassword", 
+            baseUrl + "auth/changepassword",
+            // "http://localhost:3001/auth/changepassword"||
+            // "https://react-nodejs-illumin8.herokuapp.com/auth/changepassword", 
             {
                 oldPassword: oldPassword,
                 newPassword: newPassword
