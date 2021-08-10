@@ -1,12 +1,11 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams, useHistory } from "react-router-dom";
-import axios from 'axios';
-import  profileDefault from '../uploads/profileDefault.jpg';
-import * as AiIcons from 'react-icons/ai';
-import { AuthContext } from "../helpers/AuthContext";
 import { baseUrl } from '../helpers/const';
+import axios from 'axios';
+import * as AiIcons from 'react-icons/ai';
+import  profileDefault from '../uploads/profileDefault.jpg';
 
-//tabs for profile
+// Tabs for profile
 function openCity(e, cityName)
 {
     var i, tabcontent, tablinks;
@@ -27,7 +26,6 @@ function openCity(e, cityName)
 function Profile() {
 
     let { id } = useParams();
-    let {usernameInput} = useParams();
     let history = useHistory();
     const [username, setUsername] = useState("");
     const [firstname, setFirstname] = useState("");
@@ -35,21 +33,9 @@ function Profile() {
     const [email, setEmail] = useState("");
     const [listOfPosts, setListOfPosts] = useState([]);
     const [likedPosts, setLikedPosts] = useState([]);
-    const { authState } = useContext(AuthContext);
 
     useEffect(() => {
-        axios.get(
-            baseUrl + `auth/userinfo/${id}`,
-            // `http://localhost:3001/auth/userinfo/${id}`||
-        // `https://react-nodejs-illumin8.herokuapp.com/auth/userinfo/${id}`
-        )
-        .then((response) => {
-            // console.log(response);
-            // alert(response.data.username);
-            // alert("Found username using ID");
-            // alert(response.data.firstname);
-            // alert(response.data.lastname);
-            // alert(response.data.email);
+        axios.get(baseUrl + `auth/userinfo/${id}`).then((response) => {
             setUsername(response.data.username);
             setFirstname(response.data.firstname);
             setLastname(response.data.lastname);
@@ -59,54 +45,33 @@ function Profile() {
             console.log(err);
         })
 
-        axios.get(
-            baseUrl + `posts/byuserId/${id}`,
-            // `http://localhost:3001/posts/byuserId/${id}`||
-        // `https://react-nodejs-illumin8.herokuapp.com/posts/byuserId/${id}`
-        ).then((response) => {
+        axios.get(baseUrl + `posts/byuserId/${id}`,).then((response) => {
             setListOfPosts(response.data);
-            
         }).catch(err=>{
             console.log(err);
         });
 
-        // axios.get(`http://localhost:3001/auth/userinfoo/${usernameInput}`)
-        // .then((response) => {
-        //     setUsername(response.data.username);
-        //     console.log(response);
-        //     alert(response);
-        //     alert("Found object using username");
-        // })
-        // .catch(err=>{
-        //     console.log(err);
-        // })
         if (!localStorage.getItem("accessToken")) {
             history.push("/login");
         } else {
-            axios.get(
-                baseUrl + "posts",
-                // "http://localhost:3001/posts"||
-            // "https://react-nodejs-illumin8.herokuapp.com/posts", 
-            { headers: { accessToken: localStorage.getItem("accessToken")}}).then((response) => {
-                // console.log(response);
+            axios.get(baseUrl + "posts",
+                { 
+                    headers: { accessToken: localStorage.getItem("accessToken")}
+                }
+            ).then((response) => {
                 // contains 2 arrays, listsOfPosts and likedPosts
                 setLikedPosts(response.data.likedPosts.map((like) => {
                     return like.PostId;
                 }));
             });
         }
-        
-    }, [history]);
+    }, [id]);
 
     const likePost = (postId) => {
-        axios.post(
-            baseUrl + "likes",
-            // "http://localhost:3001/likes"||
-            // "https://react-nodejs-illumin8.herokuapp.com/likes", 
+        axios.post(baseUrl + "likes", 
             { PostId: postId }, 
             { headers: { accessToken: localStorage.getItem("accessToken")}}
         ).then((response) => {
-            // alert(response.data);
             // Grab list, modify it, then set state to modified list (update)
             setListOfPosts(
                 listOfPosts.map((post) => {
@@ -138,54 +103,16 @@ function Profile() {
                 setLikedPosts([...likedPosts, postId]);
             }
         });
-    }
-
-    
-
-    // useEffect(() => {
-    //     axios.get(`http://localhost:3001/auth/userinfoo/${usernameInput}`)
-    //     .then((response) => {
-    //         setUsername(response.data.username);
-    //         console.log(response);
-    //         alert(response);
-    //         alert("Found object using username");
-    //     })
-    //     .catch(err=>{
-    //         console.log(err);
-    //     })
-    // }, []);
-
-    // let { username } = useParams();
-    // const [username, setUsername] = useState("");
-    // const [firstname, setFirstname] = useState("");
-    // const [lastname, setLastname] = useState("");
-    // const [email, setEmail] = useState("");
-    // const [tokenstuff, setTokenStuff] = useState("");
-
-    // useEffect(() => {
-    //     axios.get(`http://localhost:3001/auth/token/`, {
-    //         headers: { accessToken: localStorage.getItem("accessToken")},
-    //     })
-    //     .then((response) => {
-    //         setUsername(response.data.username);
-    //         setFirstname(response.data.firstname);
-    //         setLastname(response.data.lastname);
-    //         setEmail(response.data.email);
-    //         setTokenStuff(response.data.token);
-    //     })
-    // }, []);
+    };
 
     return (
-        //<div>
             <div className="background">
                 <main>
                     <div className="profile-card">
                         <div className="card-header">
                             <div className="pic">
                             {/* <img src='UPLOADS/".$username."/".$username.".jpg'> */}
-                                    
-                                <img src={profileDefault}/>
-                                    
+                                <img src={profileDefault} alt="missing"/>
                                 {/* <img src="ASSETS/images/smoking panda.jpg" alt="John"> */}
                             </div>
                             <div className="name">
@@ -193,56 +120,53 @@ function Profile() {
                             </div>
                             <div className="desc">Developer & Desiger</div>
                                 <div className="sm">
-                                    <a href="#" className=" fab fa-facebook-f"></a>
-                                    <a href="#" className=" fab fa-twitter"></a>
-                                    <a href="#" className=" fab fa-github"></a>
-                                    <a href="#" className=" fab fa-youtube"></a>
+                                    <AiIcons.AiFillFacebook />
+                                    <AiIcons.AiOutlineTwitter />
+                                    <AiIcons.AiFillGithub />
                                 </div>
-                            </div>
-                            <div className="card-footer">
-                                <div className="numbers">
-                                    <div className="item">
-                                        <span>120</span>
-                                            Posts
-                                    </div>
-                                    <div className="item">
-                                        <span>584</span>
-                                        Followers
-                                    </div>
-                                    <div className="item">
-                                        <span>423</span>
-                                        Following
-                                    </div>
+                        </div>
+                        <div className="card-footer">
+                            <div className="numbers">
+                                <div className="item">
+                                    <span>120</span>
+                                    Posts
+                                </div>
+                                <div className="item">
+                                    <span>584</span>
+                                    Followers
+                                </div>
+                                <div className="item">
+                                    <span>423</span>
+                                    Following
                                 </div>
                             </div>
                         </div>
-                        <div className="tab">
-                            <button className="tablinks" onClick={(e) => {openCity(e, 'About')}}>About</button>
-                            <button className="tablinks" onClick={(e) => {openCity(e, 'Skills')}}>Skills</button>
-                            <button className="tablinks" onClick={(e) => {openCity(e, 'Contact')}}>Contact</button>
-                        </div>
+                    </div>
+                    <div className="tab">
+                        <button className="tablinks" onClick={(e) => {openCity(e, 'About')}}>About</button>
+                        <button className="tablinks" onClick={(e) => {openCity(e, 'Skills')}}>Skills</button>
+                        <button className="tablinks" onClick={(e) => {openCity(e, 'Contact')}}>Contact</button>
+                    </div>
 
-                         {/* Tab content */}
-                        <div id="About" className="tabcontent">
-                            <h3>User:</h3>
-                        
-                            <p>Username: {username} </p>
-                            <p>Firstname: {firstname} </p>
-                            <p>Lastname: {lastname}</p>
-                            <p>Email: {email}</p>
-                            
-                        </div>
-                        <div id="Skills" className="tabcontent">
-                            <h3>Skills</h3>
-                            <ul id="skillsList">
-                                <li>HTML</li>
-                                <li>CSS</li>
-                                <li>JavaScript</li>
-                                <li>PHP</li>
-                                <li>React (In Progress)</li>
-                                <li>Node.JS (In Progress)</li>
-                            </ul>
-                        </div>
+                    {/* Tab content */}
+                    <div id="About" className="tabcontent">
+                        <h3>User:</h3>
+                        <p>Username: {username} </p>
+                        <p>Firstname: {firstname} </p>
+                        <p>Lastname: {lastname}</p>
+                        <p>Email: {email}</p>
+                    </div>
+                    <div id="Skills" className="tabcontent">
+                        <h3>Skills</h3>
+                        <ul id="skillsList">
+                            <li>HTML</li>
+                            <li>CSS</li>
+                            <li>JavaScript</li>
+                            <li>PHP</li>
+                            <li>React (In Progress)</li>
+                            <li>Node.JS (In Progress)</li>
+                        </ul>
+                    </div>
                     <div id="Contact" className="tabcontent">
                         <h3>Contact</h3>
                         <p>Phone: N/A</p>
@@ -262,7 +186,6 @@ function Profile() {
                                         }}
                                     >
                                         {value.postText}
-
                                     </div>
                                     <div className="footer">
                                         <div className="username">{value.username}</div>
@@ -283,7 +206,6 @@ function Profile() {
                     </div>
                 </main>
             </div>
-        //</div>
     )
 }
 

@@ -2,30 +2,26 @@ import React/*, { useContext }*/ from 'react';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useHistory, Link } from 'react-router-dom';
-import * as AiIcons from 'react-icons/ai';
-// import { FaIcons } from 'react-icons/fa';
-// import { AuthContext } from "../helpers/AuthContext";
 import { baseUrl } from '../helpers/const';
+import * as AiIcons from 'react-icons/ai';
 
 
 function Home() {
 
     const [listOfPosts, setListOfPosts] = useState([]);
     const [likedPosts, setLikedPosts] = useState([]);
-    // const { authState } = useContext(AuthContext);
-
     let history = useHistory();
-
 
     useEffect(() => {
         //redirect 
         if (!localStorage.getItem("accessToken")) {
             history.push("/login");
         } else {
-            // axios.get("http://localhost:3001/posts"||
-            // "https://react-nodejs-illumin8.herokuapp.com/posts", { headers: { accessToken: localStorage.getItem("accessToken")}}).then((response) => {
-            axios.get(baseUrl + "posts", { headers: { accessToken: localStorage.getItem("accessToken")}}).then((response) => {
-            // console.log(response);
+            axios.get(baseUrl + "posts", 
+                { 
+                    headers: { accessToken: localStorage.getItem("accessToken")}
+                }
+            ).then((response) => {
                 // contains 2 arrays, listsOfPosts and likedPosts
                 setListOfPosts(response.data.listOfPosts);
                 setLikedPosts(response.data.likedPosts.map((like) => {
@@ -35,16 +31,12 @@ function Home() {
         }
     }, [history]);
     
-
     const likePost = (postId) => {
         axios.post(
-            baseUrl + "likes",
-            // "http://localhost:3001/likes"||
-            // "https://react-nodejs-illumin8.herokuapp.com/likes", 
+            baseUrl + "likes", 
             { PostId: postId }, 
             { headers: { accessToken: localStorage.getItem("accessToken")}}
         ).then((response) => {
-            // alert(response.data);
             // Grab list, modify it, then set state to modified list (update)
             setListOfPosts(
                 listOfPosts.map((post) => {
@@ -67,23 +59,19 @@ function Home() {
             );
 
             if (likedPosts.includes(postId)) {
-                // alert(likedPosts);
                 setLikedPosts(
                     likedPosts.filter((id) => {
                         return id !== postId;
                     })
                 )
-                // alert(likedPosts);
             } else {
                 setLikedPosts([...likedPosts, postId]);
             }
         });
     }
     return (
-        // <div>
             <div className="background">
                 <main className="posts">
-                    {/* <div className="formBox"> */}
                     <h2>Posts Feed</h2>
                     {listOfPosts.map((value, key) => { 
                         return (
@@ -117,10 +105,8 @@ function Home() {
                         </div>
                         );
                     })}
-                    {/* </div> */}
                 </main>
             </div>
-        // </div>
     )
 }
 

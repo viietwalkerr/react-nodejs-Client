@@ -1,138 +1,123 @@
-import React from 'react';
+import React, {useEffect, useState, useContext } from 'react';
 // import { Nav, Form, FormControl, NavDropdown, Badge } from 'react-bootstrap';
-import styled from 'styled-components';
 import * as FaIcons from 'react-icons/fa';
 import * as AiIcons from 'react-icons/ai';
 import { BrowserRouter as Link, NavLink } from 'react-router-dom';
 import { SidebarData} from './SidebarData';
 import './Navbar.css';
 // import { IconContext } from 'react-icons';
+import { AuthContext } from '../helpers/AuthContext';
+import axios from 'axios';
+import { baseUrl } from '../helpers/const';
 
 
 
-styled.div`
-  a {
-    padding-left: 10px;
-  }
-  `;
+function Navbar() {
+    const [sidebar, setSidebar] = useState(false);
+    const { authState } = useContext(AuthContext); 
+    const { setAuthState} = useContext(AuthContext);
 
+    useEffect(() => {
+        axios.get(
+            baseUrl + "auth/token",
+            // 'http://localhost:3001/auth/token', 
+            {
+                headers: { accessToken: localStorage.getItem("accessToken")
+            }
+        }, [])
+        .then((response) => {
+            if (response.data.error) {
+                // setAuthState({...authState, status: false});
+            } else {
+                setAuthState({
+                    username: response.data.username,
+                    id: response.data.id,
+                    status: true,
+                });
+            }
+        })
+    }, []);
 
+    function logout() {
+        localStorage.removeItem("accessToken");
+        setAuthState({...authState, status: false});
+        // authState(
+        //     {
+        //         username: "",
+        //         id: 0,
+        //         status: false,
+        //     });
+    }
 
+    function showSidebar() {
+        setSidebar(!sidebar)
+    }
 
-class Navbar extends React.Component {
-  constructor(props){
-    super(props);
-    this.state = {
-      // activePath: props.location.pathname
-      sidebar: false,
-      setSidebar: false,
-      // location: useLocation()
-    };
-    this.showSidebar = this.showSidebar.bind(this);
-    this.logout = this.logout.bind(this);
-    
-  };
-
-  // showSidebar = (sidebar, setSidebar) => 
-  //   setSidebar(!sidebar)
-  
-  // showSidebar() {
-  //   this.setState(state => {
-  //     if (state.sidebar === false) {
-  //       return { sidebar: true};
-  //     } else {
-  //       return { sidebar: false};
-  //     }
-  //   });
-  // }
-  
-  logout = () => {
-    localStorage.removeItem("accessToken");
-    this.props.setAuthState(
-      {
-        username: "",
-        id: 0,
-        status: false 
-      }); 
-  };
-  
-
-  showSidebar() {
-    this.setState(state => ({
-       sidebar: !state.sidebar
-    }));
-  }
-  
-  render() {
-    // onItemClick() {
-    //   this.setState(state => ({ 
-    //     activePath: item.path
-    //   }));
-    // }
     return (
-      <>
-      {/* change color, add styles */}
-        <div className="navbar">
-          <Link to="#" className='menu-bars'>
-            <FaIcons.FaBars className="menu-bars" onClick={this.showSidebar} />
-          </Link>
-          <div className='topnav-items'>
-            <NavLink activeClassName="topNavActive" to="/">Home</NavLink>
-            <NavLink activeClassName="topNavActive" to="/about">About</NavLink>
-            <NavLink activeClassName="topNavActive" to="/post/1">Post</NavLink>
-            <NavLink activeClassName="topNavActive" to="/createpost">Create Post</NavLink>
-            {/* <Form className="form-center">
-            <FormControl type="text" placeholder="Search" className=""></FormControl>
-            </Form> */}
-            
-          </div>
-          <div className="topnav-profile">
-            {!this.props.authState.status ? (
-              <>
-              
+        <>
+            {/* change color, add styles */}
+            <div className="navbar">
+                <Link to="#" className='menu-bars'>
+                    <FaIcons.FaBars className="menu-bars" onClick={showSidebar} />
+                </Link>
+                <div className='topnav-items'>
+                    <NavLink activeClassName="topNavActive" to="/">Home</NavLink>
+                    <NavLink activeClassName="topNavActive" to="/about">About</NavLink>
+                    <NavLink activeClassName="topNavActive" to="/post/1">Post</NavLink>
+                    <NavLink activeClassName="topNavActive" to="/createpost">Create Post</NavLink>
+                    {/* <Form className="form-center">
+                    <FormControl type="text" placeholder="Search" className=""></FormControl>
+                    </Form> */}
+                    
+                </div>
+                <div className="topnav-profile">
+                {!authState.status ? (
+                    <>
+                    
+                        
+                        <NavLink activeClassName="topNavActive" to="/login">Login</NavLink>
+                        <NavLink activeClassName="topNavActive" to="/register">Register</NavLink>
+                    </>
+                    ) : (
+                    <>
+                        <NavLink activeClassName="topNavActive" to={`/profile/${authState.username}`}>{authState.username}</NavLink>
+                        
+                        <NavLink activeClassName="topNavActive" to="/settings">Settings</NavLink>
+                        <NavLink activeClassName="topNavActive" to="/logout" onClick={logout}>Logout</NavLink>
+                    </>
+                    )}
+                    
+                    
+                </div>
                 
-                <NavLink activeClassName="topNavActive" to="/login">Login</NavLink>
-                <NavLink activeClassName="topNavActive" to="/register">Register</NavLink>
-              </>
-              ) : (
-              <>
-                <NavLink activeClassName="topNavActive" to="/profile">{this.props.authState.username}</NavLink>
-                
-                <NavLink activeClassName="topNavActive" to="/notfound">Settings</NavLink>
-                <NavLink activeClassName="topNavActive" to="/logout" onClick={this.logout}>Logout</NavLink>
-              </>
-              )}
+                </div>
+                {/* <SideNav sidebar={this.state.sidebar}/> */}
+                {/* Start of Sidebar */}
+                <nav className={sidebar ? 'sidenav active' : 'sidenav'}>
+                <ul className='sidenav-items' onClick={showSidebar}>
+                    <li className="sidenav-toggle">
+                    <Link to="#" className='menu-bars'>
+                        <AiIcons.AiOutlineClose className="menu-cross"/>
+                    </Link>
+                    </li>
+                    {SidebarData.map((item, index) => {
+                    return (
+                        <li key={index} className={item.cName}>
+                        <NavLink activeClassName="sideNavActive" to={item.path} >
+                            {item.icon}
+                            <span>{item.title}</span>
+                        </NavLink>
+                        </li>
+                    )
+                    })}
+                </ul>
+                </nav>
             
-            
-          </div>
-          
-        </div>
-        {/* <SideNav sidebar={this.state.sidebar}/> */}
-        {/* Start of Sidebar */}
-        <nav className={this.state.sidebar ? 'sidenav active' : 'sidenav'}>
-          <ul className='sidenav-items' onClick={this.showSidebar}>
-            <li className="sidenav-toggle">
-              <Link to="#" className='menu-bars'>
-                <AiIcons.AiOutlineClose className="menu-cross"/>
-              </Link>
-            </li>
-            {SidebarData.map((item, index) => {
-              return (
-                <li key={index} className={item.cName}>
-                  <NavLink activeClassName="sideNavActive" to={item.path} >
-                    {item.icon}
-                    <span>{item.title}</span>
-                  </NavLink>
-                </li>
-              )
-            })}
-          </ul>
-        </nav>
-       
-      </>
+        </>
     )
-  }
 }
+    
+
 
 // class SideNav extends React.Component {
 //   constructor(props) {
@@ -241,5 +226,6 @@ class Navbar extends React.Component {
     
 //   )
 // }
+    
 
 export default Navbar

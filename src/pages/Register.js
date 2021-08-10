@@ -1,13 +1,16 @@
 import React from 'react'
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import * as Yup from "yup";
+import { baseUrl } from '../helpers/const';
+import { useHistory } from "react-router-dom";
 import axios from "axios";
+import * as Yup from "yup";
 import * as FaIcons from 'react-icons/fa';
 import * as AiIcons from 'react-icons/ai';
-import { baseUrl } from '../helpers/const';
+
 
 function Register() {
 
+    let history = useHistory();
     const initialValues = {
         firstname: "",
         lastname: "",
@@ -27,121 +30,90 @@ function Register() {
 
     const onSubmit = (data) => {
         axios.post(
-            baseUrl +"auth",
-            // "http://localhost:3001/auth"||
-        // "https://react-nodejs-illumin8.herokuapp.com/auth", 
-        data).then(()=> {
-            console.log(data);
+            baseUrl +"auth", data).then((response)=> {
+            console.log(response);
+            history.push("/success");
         });
     };
 
     return (
-        // <div>
-            <div className="background">
-                <main>
-                    <Formik 
-                        initialValues={initialValues}
-                        onSubmit={onSubmit}
-                        validationSchema={validationSchema}>
-                        <Form>
-                            <div className="formBox">
-                                <h2>Register</h2>
-                                <p>Please enter your details</p>
-                        
-                                    {/* <div className="textbox" id="firstnameInput">
-                                        <i className="fas fa-user"></i>
-                                        <input type='text' placeholder='First Name'></input>
-                                    </div>
-                                    
-                                    <div className="textbox">
-                                        <i class="fas fa-user-check"></i>
-                                        <input type='text' placeholder='Last Name'></input>
-                                    </div>
-                                    
-                                    <div className="textbox">
-                                        <i class="fas fa-envelope-square"></i>
-                                        <input type='text' placeholder='Email'></input>
-                                    </div>
-                                    
-                                    <div className="textbox">
-                                        <i class="fas fa-user-tag"></i>
-                                        <input type='text' placeholder='Username'></input>
-                                    </div>
-                                    
-
-                                    <div className="textbox">
-                                        <i class="fa fa-lock" aria-hidden="true"></i>
-                                        <input type='text' placeholder='Password'></input>
-                                    </div>
-                                    
-                                    <div className="textbox">
-                                        <i class="fa fa-lock" aria-hidden="true"></i>
-                                        <input type='text' placeholder='Confirm Password'></input>
-                                    </div> */}
-
-
-                                    <div className="textbox">
+        <div className="background">
+            <main>
+                <Formik 
+                    initialValues={initialValues}
+                    onSubmit={onSubmit}
+                    validationSchema={validationSchema}
+                >
+                    <Form>
+                        <div className="formBox">
+                            <h2>Register</h2>
+                            <p>Please enter your details</p>
+                                <div className="textbox">
                                     <ErrorMessage name="firstname" component="span" />
-                                        <span className="icon">
-                                            <FaIcons.FaUser />
-                                        </span>
-                                        <Field 
-                                            autocomplete="off"
-                                            id="inputCreatePost"
-                                            className="inputField" 
-                                            name="firstname" 
-                                            placeholder="First Name"
-                                        />
-                                    </div><div className="textbox">
+                                    <span className="icon">
+                                        <FaIcons.FaUser />
+                                    </span>
+                                    <Field 
+                                        autocomplete="off"
+                                        id="inputCreatePost"
+                                        className="inputField" 
+                                        name="firstname" 
+                                        placeholder="First Name"
+                                    />
+                                </div>
+                                <div className="textbox">
                                     <ErrorMessage name="lastname" component="span" />
-                                        <span className="icon">
-                                            <FaIcons.FaUserPlus />
-                                        </span>
-                                        <Field 
-                                            autocomplete="off"
-                                            id="inputCreatePost"
-                                            className="inputField" 
-                                            name="lastname" 
-                                            placeholder="Last Name"
-                                        />
-                                    </div><div className="textbox">
+                                    <span className="icon">
+                                        <FaIcons.FaUserPlus />
+                                    </span>
+                                    <Field 
+                                        autocomplete="off"
+                                        id="inputCreatePost"
+                                        className="inputField" 
+                                        name="lastname" 
+                                        placeholder="Last Name"
+                                    />
+                                </div>
+                                <div className="textbox">
                                     <ErrorMessage name="email" component="span" />
-                                        <span className="icon">
-                                            <AiIcons.AiFillMail />
-                                        </span>
-                                        <Field 
-                                            autocomplete="off"
-                                            id="inputCreatePost"
-                                            className="inputField" 
-                                            name="email" 
-                                            placeholder="Email Address"
-                                        />
-                                    </div><div className="textbox">
+                                    <span className="icon">
+                                        <AiIcons.AiFillMail />
+                                    </span>
+                                    <Field 
+                                        autocomplete="off"
+                                        id="inputCreatePost"
+                                        className="inputField" 
+                                        name="email" 
+                                        placeholder="Email Address"
+                                    />
+                                </div>
+                                <div className="textbox">
                                     <ErrorMessage name="username" component="span" />
-                                        <span className="icon">
-                                            <FaIcons.FaUserTag />
-                                        </span>
-                                        <Field 
-                                            autocomplete="off"
-                                            id="inputCreatePost"
-                                            className="inputField" 
-                                            name="username" 
-                                            placeholder="Username"
-                                        />
-                                    </div><div className="textbox">
+                                    <span className="icon">
+                                        <FaIcons.FaUserTag />
+                                    </span>
+                                    <Field 
+                                        autocomplete="off"
+                                        id="inputCreatePost"
+                                        className="inputField" 
+                                        name="username" 
+                                        placeholder="Username"
+                                    />
+                                </div>
+                                <div className="textbox">
                                     <ErrorMessage name="password" component="span" />
-                                        <span className="icon">
-                                            <FaIcons.FaLock />
-                                        </span>
-                                        <Field 
-                                            autocomplete="off"
-                                            type="password"
-                                            id="inputCreatePost"
-                                            className="inputField" 
-                                            name="password" 
-                                            placeholder="Password"
-                                        />
-                                    </div>
+                                    <span className="icon">
+                                        <FaIcons.FaLock />
+                                    </span>
+                                    <Field 
+                                        autocomplete="off"
+                                        type="password"
+                                        id="inputCreatePost"
+                                        className="inputField" 
+                                        name="password" 
+                                        placeholder="Password"
+                                    />
+                                </div>
                                     {/* <div className="textbox">
                                     <ErrorMessage name="confirmPassword" component="span" />
                                         <span className="icon">
@@ -156,16 +128,14 @@ function Register() {
                                             placeholder="Confirm Password"
                                         />
                                     </div> */}
-                                
-
-                                <button type="submit" className="rainbowButton">
-                                    <span>Register</span></button>
-                            </div>
-                        </Form>
-                    </Formik>
-                </main>
-            </div> 
-        // </div>
+                            <button type="submit" className="rainbowButton">
+                                <span>Register</span>
+                            </button>
+                        </div>
+                    </Form>
+                </Formik>
+            </main>
+        </div> 
     )
 }
 

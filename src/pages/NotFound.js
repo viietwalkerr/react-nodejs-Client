@@ -1,10 +1,7 @@
 import React from 'react'
-// import * as FaIcons from 'react-icons/fa';
 
 function NotFound() {
     return (
-        
-        // <div>
             <div className="background">
                 <main>
                     <div className="content">
@@ -15,8 +12,6 @@ function NotFound() {
                     </div>
                 </main>
             </div>
-        // </div>
-        
     )
 }
 

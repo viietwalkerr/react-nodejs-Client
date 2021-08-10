@@ -1,16 +1,14 @@
-import React, { /*useContext,*/ useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
-import * as Yup from 'yup';
-import axios from 'axios';
 import { useHistory } from 'react-router-dom';
-import * as FaIcons from 'react-icons/fa';
-// import { AuthContext } from "../helpers/AuthContext";
 import { baseUrl } from '../helpers/const';
+import axios from 'axios';
+import * as Yup from 'yup';
+import * as FaIcons from 'react-icons/fa';
+
 
 
 function CreatePost() {
-
-    // const { authState } = useContext(AuthContext);
 
     let history = useHistory();
     const initialValues = {
@@ -18,8 +16,8 @@ function CreatePost() {
         postText: "",
     };
 
-    //validate input
-    // requires login
+    // Validate input
+    // Requires login
     useEffect(() => {
         if (!localStorage.getItem("accessToken")) {
             history.push("/login");
@@ -31,24 +29,16 @@ function CreatePost() {
     });
 
     const onSubmit = (data) => {
-
-        // console.log(data);
         // Use headers to pass username
         axios.post(
-            baseUrl + "posts",
-            // "http://localhost:3001/posts"||
-        // "https://react-nodejs-illumin8.herokuapp.com/posts", 
-        data, {
-             headers: { accessToken: localStorage.getItem("accessToken") },
-    }).then((response) => {
-        // console.log(response);
-            // setListOfPosts(response.data);
-            // console.log("It Worked!");
+            baseUrl + "posts", data, 
+            {
+                headers: { accessToken: localStorage.getItem("accessToken") },
+            }
+        ).then((response) => {
             history.push("/");
         }, [history]);
     };
-
-    
 
     return (
         <div className="background">

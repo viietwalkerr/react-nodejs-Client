@@ -1,12 +1,13 @@
 import React from 'react'
 
-function Logout() {
+function Success() {
     return (
         <div className="background">
             <main>
                 <div className="content">
-                    <h2>Logout</h2> <br />
-                    <p>You have successfully Logged Out! <br />
+                    <h2>Registration Successful</h2> <br />
+                    <p>You have registered successfully! <br />
+                        Please proceed to the Login Page
                     </p>
                 </div>
             </main>
@@ -14,4 +15,4 @@ function Logout() {
     )
 }
 
-export default Logout
+export default Success
