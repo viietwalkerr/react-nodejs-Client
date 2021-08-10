@@ -25,7 +25,8 @@ function Register() {
     });
 
     const onSubmit = (data) => {
-        axios.post("http://localhost:3001/auth", data).then(()=> {
+        axios.post("http://localhost:3001/auth"||
+        "https://react-nodejs-illumin8.herokuapp.com/auth", data).then(()=> {
             console.log(data);
         });
     };

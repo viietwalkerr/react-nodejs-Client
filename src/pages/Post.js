@@ -19,7 +19,9 @@ function Post() {
 
     useEffect(() => {
 
-        axios.get(`http://localhost:3001/posts/byId/${id}`).then((response) => {
+        axios.get(
+            `http://localhost:3001/posts/byId/${id}` || 
+            `https://react-nodejs-illumin8.herokuapp.com/posts/byId${id}`).then((response) => {
         // console.log(response);
         // setListOfPosts(response.data);
             setPostObject(response.data);
@@ -53,7 +55,9 @@ function Post() {
             
             
         });
-        axios.get("http://localhost:3001/posts", {headers: {accessToken: localStorage.getItem("accessToken")}})
+        axios.get(
+            "http://localhost:3001/posts" || 
+            "https://react-nodejs-illumin8.herokuapp.com/posts", {headers: {accessToken: localStorage.getItem("accessToken")}})
         .then((response) => {
             setListOfPosts(response.data.listOfPosts);
             setLikedPosts(response.data.likedPosts.map((like)=> {
@@ -61,7 +65,9 @@ function Post() {
             }));
         })
         
-        axios.get(`http://localhost:3001/comments/${id}`).then((response) => {
+        axios.get(
+            `http://localhost:3001/comments/${id}` ||
+            `https://react-nodejs-illumin8.herokuapp.com/comments/${id}`).then((response) => {
             setComments(response.data);
         });
     }, []);
@@ -179,7 +185,8 @@ function Post() {
 
             
         axios.post(
-            "http://localhost:3001/likes", 
+            "http://localhost:3001/likes" ||
+            "https://react-nodejs-illumin8.herokuapp.com", 
             { PostId: postId }, 
             { headers: { accessToken: localStorage.getItem("accessToken") } }
         ).then((response) => {
@@ -284,7 +291,8 @@ function Post() {
 
 
     const addComment = () => {
-        axios.post("http://localhost:3001/comments", {
+        axios.post("http://localhost:3001/comments"||
+        "https://react-nodejs-illumin8.herokuapp.com/comments", {
             commentBody: newComment, 
             PostId: id
         },
@@ -310,7 +318,8 @@ function Post() {
 
     const deleteComment = (id) => {
         // use ` to add js variables
-        axios.delete(`http://localhost:3001/comments/${id}`, {
+        axios.delete(`http://localhost:3001/comments/${id}`||
+        `https://react-nodejs-illumin8.herokuapp.com/comments/${id}`, {
             headers: {accessToken: localStorage.getItem("accessToken")},
         })
         .then(()=> {
@@ -324,7 +333,8 @@ function Post() {
     };
 
     const deletePost = (id) => {
-        axios.delete(`http://localhost:3001/posts/${id}`, {
+        axios.delete(`http://localhost:3001/posts/${id}`||
+        `https://react-nodejs-illumin8.herokuapp.com/posts/${id}`, {
             headers: { accessToken: localStorage.getItem("accessToken") },
         })
         .then(() => {
@@ -354,7 +364,8 @@ function Post() {
         if (option === "title") {
             let newTitle = prompt("Enter New Title:");
             axios.put(
-                "http://localhost:3001/posts/title", 
+                "http://localhost:3001/posts/title"||
+                "https://react-nodejs-illumin8.herokuapp.com/posts/title", 
                 { 
                     newTitle: newTitle, 
                     id: id
@@ -367,7 +378,8 @@ function Post() {
         } else {
             let newPostText = prompt("Enter New Post Text:");
             axios.put(
-                "http://localhost:3001/posts/postText", 
+                "http://localhost:3001/posts/postText" ||
+                "https://react-nodejs-illumin8.herokuapp.com/posts/postText", 
                 { 
                     newText: newPostText, 
                     id: id

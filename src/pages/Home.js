@@ -21,7 +21,8 @@ function Home() {
         if (!localStorage.getItem("accessToken")) {
             history.push("/login");
         } else {
-            axios.get("http://localhost:3001/posts", { headers: { accessToken: localStorage.getItem("accessToken")}}).then((response) => {
+            axios.get("http://localhost:3001/posts"||
+            "https://react-nodejs-illumin8.herokuapp.com/posts", { headers: { accessToken: localStorage.getItem("accessToken")}}).then((response) => {
                 // console.log(response);
                 // contains 2 arrays, listsOfPosts and likedPosts
                 setListOfPosts(response.data.listOfPosts);
@@ -35,7 +36,8 @@ function Home() {
 
     const likePost = (postId) => {
         axios.post(
-            "http://localhost:3001/likes", 
+            "http://localhost:3001/likes"||
+            "https://react-nodejs-illumin8.herokuapp.com/likes", 
             { PostId: postId }, 
             { headers: { accessToken: localStorage.getItem("accessToken")}}
         ).then((response) => {

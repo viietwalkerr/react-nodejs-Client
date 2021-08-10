@@ -48,7 +48,7 @@ function App() {
   });
 
   useEffect(() => {
-    axios.get('http://localhost:3001/auth/token', {
+    axios.get('http://localhost:3001/auth/token'||'https://react-nodejs-illumin8.herokuapp.com/auth/token', {
       headers: {
         accessToken: localStorage.getItem("accessToken")
       }

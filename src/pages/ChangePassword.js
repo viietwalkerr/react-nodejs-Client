@@ -9,7 +9,8 @@ function ChangePassword() {
 
     const changePassword = () => {
         axios.put(
-            "http://localhost:3001/auth/changepassword", 
+            "http://localhost:3001/auth/changepassword"||
+            "https://react-nodejs-illumin8.herokuapp.com/auth/changepassword", 
             {
                 oldPassword: oldPassword,
                 newPassword: newPassword

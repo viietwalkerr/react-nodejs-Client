@@ -20,7 +20,8 @@ function Login() {
 
     const login = () => {
         const data = {username: username, password: password}; //creating an object
-        axios.post("http://localhost:3001/auth/login", data).then((response) => {
+        axios.post("http://localhost:3001/auth/login" ||
+        "https://react-nodejs-illumin8.herokuapp.com/auth/login", data).then((response) => {
             console.log(response.data)
             if (response.data.error){
                 alert(response.data.error);

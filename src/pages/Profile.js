@@ -37,7 +37,8 @@ function Profile() {
     const { authState } = useContext(AuthContext);
 
     useEffect(() => {
-        axios.get(`http://localhost:3001/auth/userinfo/${id}`)
+        axios.get(`http://localhost:3001/auth/userinfo/${id}`||
+        `https://react-nodejs-illumin8.herokuapp.com/auth/userinfo/${id}`)
         .then((response) => {
             // console.log(response);
             // alert(response.data.username);
@@ -54,7 +55,8 @@ function Profile() {
             console.log(err);
         })
 
-        axios.get(`http://localhost:3001/posts/byuserId/${id}`).then((response) => {
+        axios.get(`http://localhost:3001/posts/byuserId/${id}`||
+        `https://react-nodejs-illumin8.herokuapp.com/posts/byuserId/${id}`).then((response) => {
             setListOfPosts(response.data);
             
         }).catch(err=>{
@@ -74,7 +76,8 @@ function Profile() {
         if (!localStorage.getItem("accessToken")) {
             history.push("/login");
         } else {
-            axios.get("http://localhost:3001/posts", { headers: { accessToken: localStorage.getItem("accessToken")}}).then((response) => {
+            axios.get("http://localhost:3001/posts"||
+            "https://react-nodejs-illumin8.herokuapp.com/posts", { headers: { accessToken: localStorage.getItem("accessToken")}}).then((response) => {
                 // console.log(response);
                 // contains 2 arrays, listsOfPosts and likedPosts
                 setLikedPosts(response.data.likedPosts.map((like) => {
@@ -87,7 +90,8 @@ function Profile() {
 
     const likePost = (postId) => {
         axios.post(
-            "http://localhost:3001/likes", 
+            "http://localhost:3001/likes"||
+            "https://react-nodejs-illumin8.herokuapp.com/likes", 
             { PostId: postId }, 
             { headers: { accessToken: localStorage.getItem("accessToken")}}
         ).then((response) => {

@@ -33,7 +33,8 @@ function CreatePost() {
 
         // console.log(data);
         // Use headers to pass username
-        axios.post("http://localhost:3001/posts", data, {
+        axios.post("http://localhost:3001/posts"||
+        "https://react-nodejs-illumin8.herokuapp.com/posts", data, {
              headers: { accessToken: localStorage.getItem("accessToken") },
     }).then((response) => {
         // console.log(response);
