@@ -61,10 +61,21 @@ function Navbar() {
                     <FaIcons.FaBars className="menu-bars" onClick={showSidebar} />
                 </Link>
                 <div className='topnav-items'>
-                    <NavLink activeClassName="topNavActive" to="/">Home</NavLink>
-                    <NavLink activeClassName="topNavActive" to="/about">About</NavLink>
-                    <NavLink activeClassName="topNavActive" to="/post/1">Post</NavLink>
-                    <NavLink activeClassName="topNavActive" to="/createpost">Create Post</NavLink>
+                    {!authState.status ? (
+                        <>
+                            <NavLink activeClassName="topNavActive" to="/">Home</NavLink>
+                            <NavLink activeClassName="topNavActive" to="/about">About</NavLink>
+                        </>
+                    ): (
+                        <>
+                            <NavLink activeClassName="topNavActive" to="/">Home</NavLink>
+                            <NavLink activeClassName="topNavActive" to="/about">About</NavLink>
+                            
+                            <NavLink activeClassName="topNavActive" to="/post/1">Post</NavLink>
+                            <NavLink activeClassName="topNavActive" to="/createpost">Create Post</NavLink>
+                        </>
+                    )}
+                    
                     {/* <Form className="form-center">
                     <FormControl type="text" placeholder="Search" className=""></FormControl>
                     </Form> */}

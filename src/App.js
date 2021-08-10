@@ -63,7 +63,7 @@ function App() {
         });
       }
     });  
-  },[authState]);
+  },[]);
 
   window.onscroll = function() {scrollFunction()};
 
