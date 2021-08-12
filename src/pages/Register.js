@@ -29,10 +29,15 @@ function Register() {
     });
 
     const onSubmit = (data) => {
-        axios.post(
-            baseUrl +"auth", data).then((response)=> {
-            console.log(response);
-            history.push("/success");
+        axios.post(baseUrl +"auth", data)
+        .then((response)=> {
+            if (response.data.error){
+                alert(response.data.error);
+                console.log(response.data.error);
+            } else {
+                console.log(response);
+                history.push("/success");
+            }
         });
     };
 
@@ -54,8 +59,8 @@ function Register() {
                                         <FaIcons.FaUser />
                                     </span>
                                     <Field 
-                                        autocomplete="off"
-                                        id="inputCreatePost"
+                                        autoComplete="off"
+                                        // id="inputCreatePost"
                                         className="inputField" 
                                         name="firstname" 
                                         placeholder="First Name"
@@ -67,8 +72,8 @@ function Register() {
                                         <FaIcons.FaUserPlus />
                                     </span>
                                     <Field 
-                                        autocomplete="off"
-                                        id="inputCreatePost"
+                                        autoComplete="off"
+                                        // id="inputCreatePost"
                                         className="inputField" 
                                         name="lastname" 
                                         placeholder="Last Name"
@@ -80,8 +85,8 @@ function Register() {
                                         <AiIcons.AiFillMail />
                                     </span>
                                     <Field 
-                                        autocomplete="off"
-                                        id="inputCreatePost"
+                                        autoComplete="off"
+                                        // id="inputCreatePost"
                                         className="inputField" 
                                         name="email" 
                                         placeholder="Email Address"
@@ -93,8 +98,8 @@ function Register() {
                                         <FaIcons.FaUserTag />
                                     </span>
                                     <Field 
-                                        autocomplete="off"
-                                        id="inputCreatePost"
+                                        autoComplete="off"
+                                        // id="inputCreatePost"
                                         className="inputField" 
                                         name="username" 
                                         placeholder="Username"
@@ -106,9 +111,9 @@ function Register() {
                                         <FaIcons.FaLock />
                                     </span>
                                     <Field 
-                                        autocomplete="off"
+                                        autoComplete="off"
                                         type="password"
-                                        id="inputCreatePost"
+                                        // id="inputCreatePost"
                                         className="inputField" 
                                         name="password" 
                                         placeholder="Password"

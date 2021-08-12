@@ -4,6 +4,7 @@ import { baseUrl } from '../helpers/const';
 import axios from 'axios';
 import * as AiIcons from 'react-icons/ai';
 import  profileDefault from '../uploads/profileDefault.jpg';
+import Cookies from 'js-cookie';
 
 // Tabs for profile
 function openCity(e, cityName)
@@ -51,8 +52,10 @@ function Profile() {
             console.log(err);
         });
 
-        if (!localStorage.getItem("accessToken")) {
-            history.push("/login");
+        // if (!localStorage.getItem("accessToken")) {
+        //     history.push("/login");
+        if (!Cookies.get()) {
+            history.push("/");
         } else {
             axios.get(baseUrl + "posts",
                 { 

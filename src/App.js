@@ -18,6 +18,7 @@ import Settings from './pages/Settings';
 import ChangePassword from './pages/ChangePassword';
 import NotFound from './pages/NotFound';
 
+axios.defaults.withCredentials = true;
 
 function scrollFunction()
 {
@@ -46,12 +47,16 @@ function App() {
   });
 
   useEffect(() => {
-    axios.get(baseUrl +"auth/token", {
-      headers: {
-        accessToken: localStorage.getItem("accessToken")
-      }
-    }, [])
+    axios.get(baseUrl +"auth/token", 
+    // {
+      // headers: {
+      //   accessToken: localStorage.getItem("accessToken")
+      // }
+     
+    // },
+     [])
     .then((response) => {
+      console.log("checked for token");
       // Checks for errors for login state
       if (response.data.error) {
         setAuthState({...authState, status: false}); //only change 1 

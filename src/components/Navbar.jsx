@@ -9,6 +9,7 @@ import './Navbar.css';
 import { AuthContext } from '../helpers/AuthContext';
 import axios from 'axios';
 import { baseUrl } from '../helpers/const';
+import Cookies from 'js-cookie';
 
 
 
@@ -17,30 +18,46 @@ function Navbar() {
     const { authState } = useContext(AuthContext); 
     const { setAuthState} = useContext(AuthContext);
 
+
+
     useEffect(() => {
-        axios.get(
-            baseUrl + "auth/token",
-            // 'http://localhost:3001/auth/token', 
-            {
-                headers: { accessToken: localStorage.getItem("accessToken")
-            }
-        }, [])
-        .then((response) => {
-            if (response.data.error) {
-                // setAuthState({...authState, status: false});
-            } else {
-                setAuthState({
-                    username: response.data.username,
-                    id: response.data.id,
-                    status: true,
-                });
-            }
-        })
+        // axios.get(
+        //     baseUrl + "auth/token",
+        //     // 'http://localhost:3001/auth/token', 
+        //     {
+        //         headers: { accessToken: localStorage.getItem("accessToken")
+        //     }
+        // }, [])
+        // .then((response) => {
+        //     if (response.data.error) {
+        //         // setAuthState({...authState, status: false});
+        //     } else {
+        //         setAuthState({
+        //             username: response.data.username,
+        //             id: response.data.id,
+        //             status: true,
+        //         });
+        //     }
+        // })
+        if (!Cookies.get("access-token")){
+            setAuthState({...authState, status: false});
+        } else {
+            setAuthState({...authState, status: true});
+        }
     }, []);
 
     function logout() {
-        localStorage.removeItem("accessToken");
-        setAuthState({...authState, status: false});
+
+        axios.get(baseUrl + "auth/logout").then((response) => {
+            Cookies.remove("access-token");
+            document.cookie = "access-token=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
+            console.log(response);
+            setAuthState({...authState, status: false});
+        })
+
+        // localStorage.removeItem("accessToken");
+        // setAuthState({...authState, status: false});
+        
         // authState(
         //     {
         //         username: "",

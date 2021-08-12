@@ -5,7 +5,7 @@ import { baseUrl } from '../helpers/const';
 import axios from 'axios';
 import * as Yup from 'yup';
 import * as FaIcons from 'react-icons/fa';
-
+import Cookies from 'js-cookie';
 
 
 function CreatePost() {
@@ -19,8 +19,11 @@ function CreatePost() {
     // Validate input
     // Requires login
     useEffect(() => {
-        if (!localStorage.getItem("accessToken")) {
-            history.push("/login");
+        // if (!localStorage.getItem("accessToken")) {
+        //     history.push("/login");
+        // }
+        if (!Cookies.get()) {
+            history.push("/");
         }
     }, [history]); //need to put array or useEffect will continue infinitely
     const validationSchema = Yup.object().shape({

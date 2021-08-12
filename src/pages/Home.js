@@ -1,8 +1,9 @@
 import React/*, { useContext }*/ from 'react';
 import axios from 'axios';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import { useHistory, Link } from 'react-router-dom';
 import { baseUrl } from '../helpers/const';
+import { AuthContext } from '../helpers/AuthContext';
 import * as AiIcons from 'react-icons/ai';
 
 
@@ -10,12 +11,15 @@ function Home() {
 
     const [listOfPosts, setListOfPosts] = useState([]);
     const [likedPosts, setLikedPosts] = useState([]);
+    const authState = useContext(AuthContext);
     let history = useHistory();
 
     useEffect(() => {
         //redirect 
-        if (!localStorage.getItem("accessToken")) {
-            history.push("/login");
+        // if (!localStorage.getItem("accessToken")) {
+        //     history.push("/login");
+        if (authState.status === false) {
+            // history.push("/");            
         } else {
             axios.get(baseUrl + "posts", 
                 { 

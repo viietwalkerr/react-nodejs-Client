@@ -9,26 +9,35 @@ function Login() {
 
     const [username, setUsername] = useState();
     const [password, setPassword] = useState();
+    const { authState } = useContext(AuthContext);
     const {setAuthState} = useContext(AuthContext);
+    const [loginStatus, setLoginStatus] = useState("");
 
     let history = useHistory();
 
+    axios.defaults.withCredentials = true;
+
     useEffect(() => {
-        if (localStorage.getItem("accessToken")){
+        // if (localStorage.getItem("accessToken")){
+        //     history.push("/");
+        // }
+        if (authState.status === true) {
             history.push("/");
         }
-    })
+    });
 
     const login = () => {
         const data = {username: username, password: password}; //creating an object
-        axios.post(baseUrl + "auth/login", data
+        axios.post(baseUrl + "auth/login",  data
         )
         .then((response) => {
             console.log(response.data)
             if (response.data.error){
                 alert(response.data.error);
+                console.log(response.data.error);
             } else {
-                localStorage.setItem("accessToken", response.data.token);
+                setLoginStatus(response.data[0].username)
+                // localStorage.setItem("accessToken", response.data.token);
                 setAuthState({ 
                     username: response.data.username, 
                     id: response.data.id, 

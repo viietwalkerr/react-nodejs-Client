@@ -4,6 +4,7 @@ import { baseUrl } from '../helpers/const';
 import { AuthContext } from "../helpers/AuthContext";
 import axios from 'axios';
 import * as AiIcons from 'react-icons/ai';
+import Cookies from 'js-cookie';
 
 
 function Post() {
@@ -54,9 +55,10 @@ function Post() {
             
         });
         axios.get(baseUrl + "posts",
-            {
-                headers: {accessToken: localStorage.getItem("accessToken")}
-            }
+            // {
+            //     headers: {accessToken: localStorage.getItem("accessToken")}
+            // }
+            { withCredentials: true }
         )
         .then((response) => {
             setListOfPosts(response.data.listOfPosts);
