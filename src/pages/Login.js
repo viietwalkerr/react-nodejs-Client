@@ -21,9 +21,9 @@ function Login() {
         // if (localStorage.getItem("accessToken")){
         //     history.push("/");
         // }
-        if (authState.status === true) {
-            history.push("/");
-        }
+        // if (authState.status === true) {
+        //     history.push("/");
+        // }
     });
 
     const login = () => {
