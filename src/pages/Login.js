@@ -28,7 +28,7 @@ function Login() {
 
     const login = () => {
         const data = {username: username, password: password}; //creating an object
-        axios.post(baseUrl + "auth/login",  data
+        axios.post(baseUrl + "auth/login", {crossDomain: true}, data
         )
         .then((response) => {
             console.log(response.data)
