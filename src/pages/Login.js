@@ -54,7 +54,7 @@ function Login() {
                     <div className="formBox">
                         <h2>Login</h2>
                         <p>Please enter your login details</p>
-                            <form>
+                            <form netlify>
                                 <div className="textbox">
                                     <i className="fas fa-user"></i>
                                     <span className="icon">

@@ -52,7 +52,7 @@ function Register() {
                     onSubmit={onSubmit}
                     validationSchema={validationSchema}
                 >
-                    <Form>
+                    <Form netlify>
                         <div className="formBox">
                             <h2>Register</h2>
                             <p>Please enter your details</p>
