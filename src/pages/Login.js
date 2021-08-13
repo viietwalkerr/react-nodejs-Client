@@ -155,6 +155,7 @@ function Login() {
                                                 className="inputField"
                                                 name="password"
                                                 placeholder="Password"
+                                                type="password"
                                             />
                                         </div>
                                         <button type="submit" className="rainbowButton">

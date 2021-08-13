@@ -22,9 +22,10 @@ function Home() {
             // history.push("/");            
         } else {
             axios.get(baseUrl + "posts", 
-                { 
-                    headers: { accessToken: localStorage.getItem("accessToken")}
-                }
+                // { 
+                //     headers: { accessToken: localStorage.getItem("accessToken")}
+                // }
+                { headers: {userId: authState.id}}
             ).then((response) => {
                 // contains 2 arrays, listsOfPosts and likedPosts
                 setListOfPosts(response.data.listOfPosts);

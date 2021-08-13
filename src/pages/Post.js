@@ -58,7 +58,9 @@ function Post() {
             // {
             //     headers: {accessToken: localStorage.getItem("accessToken")}
             // }
-            { withCredentials: true }
+            { headers: {userId: authState.id}}
+             
+            // { withCredentials: true }
         )
         .then((response) => {
             setListOfPosts(response.data.listOfPosts);
