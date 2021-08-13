@@ -28,7 +28,7 @@ function Login() {
 
     const login = () => {
         const data = {username: username, password: password}; //creating an object
-        axios.post("https://illumin8.netlify.app/" + "auth/login", data, {crossDomain: true}
+        axios.post(baseUrl + "auth/login", data, {crossDomain: true}
         )
         .then((response) => {
             console.log(response.data)
