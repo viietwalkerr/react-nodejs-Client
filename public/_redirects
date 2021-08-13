@@ -1,9 +1,2 @@
 /* /index.html 200
 
-/auth/* https://react-nodejs-illumin8.herokuapp.com/auth/:splat 200
-
-/posts/* https://react-nodejs-illumin8.herokuapp.com/posts/:splat 200
-
-/likes https://react-nodejs-illumin8.herokuapp.com/likes 200
-
-/comments/* https://react-nodejs-illumin8.herokuapp.com/comments/:splat 200
