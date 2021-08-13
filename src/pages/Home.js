@@ -21,7 +21,7 @@ function Home() {
         if (authState.status === false) {
             // history.push("/");            
         } else {
-            axios.get(baseUrl + "posts", 
+            axios.get(baseUrl + "/posts", 
                 { 
                     headers: { accessToken: localStorage.getItem("accessToken")}
                 }

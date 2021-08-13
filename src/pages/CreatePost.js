@@ -34,7 +34,7 @@ function CreatePost() {
     const onSubmit = (data) => {
         // Use headers to pass username
         axios.post(
-            baseUrl + "posts", data, 
+            baseUrl + "/posts", data, 
             {
                 headers: { accessToken: localStorage.getItem("accessToken") },
             }

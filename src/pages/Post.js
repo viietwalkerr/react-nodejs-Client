@@ -18,7 +18,7 @@ function Post() {
 
     useEffect(() => {
         axios.get(
-            baseUrl + `posts/byId/${id}`,
+            baseUrl + `/posts/byId/${id}`,
         )
         .then((response) => {
         // console.log(response);
@@ -54,7 +54,7 @@ function Post() {
             
             
         });
-        axios.get(baseUrl + "posts",
+        axios.get(baseUrl + "/posts",
             // {
             //     headers: {accessToken: localStorage.getItem("accessToken")}
             // }
@@ -67,7 +67,7 @@ function Post() {
             }));
         });
         
-        axios.get(baseUrl + `comments/${id}`
+        axios.get(baseUrl + `/comments/${id}`
          
         ).then((response) => {
             setComments(response.data);
@@ -171,7 +171,7 @@ function Post() {
         //     }
         // })
     
-        axios.post(baseUrl + "likes", 
+        axios.post(baseUrl + "/likes", 
             { PostId: postId }, 
             { 
                 headers: { accessToken: localStorage.getItem("accessToken") } 
@@ -206,7 +206,7 @@ function Post() {
     };
         
     const addComment = () => {
-        axios.post(baseUrl + "comments", 
+        axios.post(baseUrl + "/comments", 
             {
                 commentBody: newComment, 
                 PostId: id
@@ -228,7 +228,7 @@ function Post() {
 
     const deleteComment = (id) => {
         // use ` to add js variables
-        axios.delete(baseUrl + `comments/${id}`, 
+        axios.delete(baseUrl + `/comments/${id}`, 
             {
                 headers: {accessToken: localStorage.getItem("accessToken")},
             }
@@ -244,7 +244,7 @@ function Post() {
     };
 
     const deletePost = (id) => {
-        axios.delete(baseUrl + `posts/${id}`, 
+        axios.delete(baseUrl + `/posts/${id}`, 
             {
                 headers: { accessToken: localStorage.getItem("accessToken") },
             }
@@ -264,7 +264,7 @@ function Post() {
     const editPost = (option) => {
         if (option === "title") {
             let newTitle = prompt("Enter New Title:");
-            axios.put(baseUrl + "posts/title", 
+            axios.put(baseUrl + "/posts/title", 
                 { 
                     newTitle: newTitle, 
                     id: id
@@ -276,7 +276,7 @@ function Post() {
             setPostObject({...postObject, title: newTitle});
         } else {
             let newPostText = prompt("Enter New Post Text:");
-            axios.put(baseUrl + "posts/postText",
+            axios.put(baseUrl + "/posts/postText",
                 { 
                     newText: newPostText, 
                     id: id

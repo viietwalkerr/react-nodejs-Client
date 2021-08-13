@@ -29,7 +29,7 @@ function Register() {
     });
 
     const onSubmit = (data) => {
-        axios.post(baseUrl +"auth", data)
+        axios.post(baseUrl +"/auth", data)
         .then((response)=> {
             if (response.data.error){
                 alert(response.data.error);
