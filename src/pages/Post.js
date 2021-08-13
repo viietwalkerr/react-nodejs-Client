@@ -18,7 +18,7 @@ function Post() {
 
     useEffect(() => {
         axios.get(
-            baseUrl + `/posts/byId/${id}`,
+            baseUrl + `posts/byId/${id}`,
         )
         .then((response) => {
         // console.log(response);
@@ -54,7 +54,7 @@ function Post() {
             
             
         });
-        axios.get(baseUrl + "/posts",
+        axios.get(baseUrl + "posts",
             // {
             //     headers: {accessToken: localStorage.getItem("accessToken")}
             // }
@@ -67,7 +67,7 @@ function Post() {
             }));
         });
         
-        axios.get(baseUrl + `/comments/${id}`
+        axios.get(baseUrl + `comments/${id}`
          
         ).then((response) => {
             setComments(response.data);
@@ -171,7 +171,7 @@ function Post() {
         //     }
         // })
     
-        axios.post(baseUrl + "/likes", 
+        axios.post(baseUrl + "likes", 
             { PostId: postId }, 
             { 
                 headers: { accessToken: localStorage.getItem("accessToken") } 

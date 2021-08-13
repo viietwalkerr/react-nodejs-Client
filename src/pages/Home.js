@@ -37,7 +37,7 @@ function Home() {
     
     const likePost = (postId) => {
         axios.post(
-            baseUrl + "/likes", 
+            baseUrl + "likes", 
             { PostId: postId }, 
             { headers: { accessToken: localStorage.getItem("accessToken")}}
         ).then((response) => {

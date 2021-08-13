@@ -36,7 +36,7 @@ function Profile() {
     const [likedPosts, setLikedPosts] = useState([]);
 
     useEffect(() => {
-        axios.get(baseUrl + `/auth/userinfo/${id}`).then((response) => {
+        axios.get(baseUrl + `auth/userinfo/${id}`).then((response) => {
             setUsername(response.data.username);
             setFirstname(response.data.firstname);
             setLastname(response.data.lastname);
@@ -46,7 +46,7 @@ function Profile() {
             console.log(err);
         })
 
-        axios.get(baseUrl + `/posts/byuserId/${id}`,).then((response) => {
+        axios.get(baseUrl + `posts/byuserId/${id}`,).then((response) => {
             setListOfPosts(response.data);
         }).catch(err=>{
             console.log(err);
@@ -57,7 +57,7 @@ function Profile() {
         if (!Cookies.get()) {
             history.push("/");
         } else {
-            axios.get(baseUrl + "/posts",
+            axios.get(baseUrl + "posts",
                 { 
                     headers: { accessToken: localStorage.getItem("accessToken")}
                 }
@@ -71,7 +71,7 @@ function Profile() {
     }, [id]);
 
     const likePost = (postId) => {
-        axios.post(baseUrl + "/likes", 
+        axios.post(baseUrl + "likes", 
             { PostId: postId }, 
             { headers: { accessToken: localStorage.getItem("accessToken")}}
         ).then((response) => {

@@ -10,7 +10,7 @@ function ChangePassword() {
 
     const changePassword = () => {
         axios.put(
-            baseUrl + "/auth/changepassword", 
+            baseUrl + "auth/changepassword", 
             {
                 oldPassword: oldPassword,
                 newPassword: newPassword
