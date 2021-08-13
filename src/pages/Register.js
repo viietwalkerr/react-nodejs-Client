@@ -8,7 +8,10 @@ import * as FaIcons from 'react-icons/fa';
 import * as AiIcons from 'react-icons/ai';
 
 
+
 function Register() {
+
+    axios.defaults.withCredentials = true;
 
     let history = useHistory();
     const initialValues = {
