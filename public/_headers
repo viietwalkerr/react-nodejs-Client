@@ -1,2 +1,2 @@
 /* 
-Access-Control-Allow-Origin: * ,'http://localhost:3001', 'https://react-nodejs-illumin8.herokuapp.com', 'react-nodejs-illumin8.herokuapp.com', 'https://illumin8.netlify.app', 'illumin8.netlify.app'
+  Access-Control-Allow-Origin: * ,'http://localhost:3001', 'https://react-nodejs-illumin8.herokuapp.com', 'react-nodejs-illumin8.herokuapp.com', 'https://illumin8.netlify.app', 'illumin8.netlify.app'
