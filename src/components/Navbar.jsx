@@ -22,7 +22,7 @@ function Navbar() {
 
     useEffect(() => {
         // axios.get(
-        //     baseUrl + "/auth/token",
+        //     baseUrl + "auth/token",
         //     // 'http://localhost:3001/auth/token', 
         //     {
         //         headers: { accessToken: localStorage.getItem("accessToken")
@@ -48,7 +48,7 @@ function Navbar() {
 
     function logout() {
 
-        axios.get(baseUrl + "/auth/logout").then((response) => {
+        axios.get(baseUrl + "auth/logout").then((response) => {
             Cookies.remove("access-token");
             document.cookie = "access-token=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
             console.log(response);
