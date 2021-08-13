@@ -23,15 +23,37 @@ function Login() {
         password: ""
     };
 
+    // const loginSubmit = (data) => {
+    //     axios.post(baseUrl + "auth/login", data, {crossDomain: true})
+    //     .then((response) => {
+    //         console.log(response.data)
+    //         if (response.data.error) {
+    //             alert(response.data.error);
+    //             console.log(response.data.error);
+    //         } else {
+    //             console.log(response);
+    //             history.push("/about");
+    //         }
+    //     });
+    // };
+
+    // new stuff
     const loginSubmit = (data) => {
-        axios.post(baseUrl + "auth/login", data)
+        axios.post(baseUrl + "auth/login", data, {crossDomain: true})
         .then((response) => {
             console.log(response.data)
             if (response.data.error) {
                 alert(response.data.error);
                 console.log(response.data.error);
+                setLoginStatus(response.data.error);
             } else {
                 console.log(response);
+                setLoginStatus(response.data.username);
+                setAuthState({ 
+                    username: response.data.username, 
+                    id: response.data.id, 
+                    status: true 
+                });
                 history.push("/about");
             }
         });
@@ -56,7 +78,7 @@ function Login() {
                 alert(response.data.error);
                 console.log(response.data.error);
             } else {
-                setLoginStatus(response.data[0].username)
+                setLoginStatus(response.data.username)
                 // localStorage.setItem("accessToken", response.data.token);
                 setAuthState({ 
                     username: response.data.username, 
