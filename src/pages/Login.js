@@ -1,5 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react';
 import axios from 'axios';
+import { Formik, Form, Field } from "formik";
 import { useHistory } from 'react-router-dom';
 import { AuthContext } from '../helpers/AuthContext';
 import { baseUrl } from '../helpers/const';
@@ -17,6 +18,25 @@ function Login() {
 
     axios.defaults.withCredentials = true;
 
+    const initialValues = {
+        username: "",
+        password: ""
+    };
+
+    const loginSubmit = (data) => {
+        axios.post(baseUrl + "auth/login", data)
+        .then((response) => {
+            console.log(response.data)
+            if (response.data.error) {
+                alert(response.data.error);
+                console.log(response.data.error);
+            } else {
+                console.log(response);
+                history.push("/about");
+            }
+        });
+    };
+    
     useEffect(() => {
         // if (localStorage.getItem("accessToken")){
         //     history.push("/");
@@ -47,6 +67,7 @@ function Login() {
             }  
         });
     };
+
 
     return (
             <div className="background">
@@ -85,6 +106,42 @@ function Login() {
                                     <span>Sign In</span>
                                 </button>
                             </form>
+                            <Formik 
+                                initialValues={initialValues}
+                                onSubmit={loginSubmit}
+                            >
+                                <Form netlify>
+                                    <div className="formBox">
+                                        <h2>Login Formik</h2>
+                                        <div className="textbox">
+                                            <span className="icon">
+                                                <FaIcons.FaUserAlt />
+                                            </span>
+                                            <Field
+                                                autoComplete="off"
+                                                className="inputField"
+                                                name="username"
+                                                placeholder="Username"
+                                            />
+                                        </div>
+                                        <div className="textbox">
+                                            <span className="icon">
+                                                <FaIcons.FaLock />
+                                            </span>
+                                            <Field 
+                                                autoComplete="off"
+                                                className="inputField"
+                                                name="password"
+                                                placeholder="Password"
+                                            />
+                                        </div>
+                                        <button type="submit" className="rainbowButton">
+                                            <span>Submit</span>
+                                        </button>
+                                    </div>
+                                </Form>
+                            </Formik>
+                           
                     </div>
                 </main>
             </div>
