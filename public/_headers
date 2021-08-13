@@ -1,6 +1,6 @@
 /* 
   
-  Access-Control-Allow-Origin: https://illumin8.netlify.app
+  Access-Control-Allow-Origin: https://react-nodejs-illumin8.herokuapp.com
   Access-Control-Allow-Methods: GET, POST, PUT
   Access-Control-Allow-Methods: GET
   Access-Control-Allow-Methods: POST
