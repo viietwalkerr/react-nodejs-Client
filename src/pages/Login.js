@@ -49,7 +49,7 @@ function Login() {
             } else {
                 console.log(response);
                 setLoginStatus(response.data.username);
-                setAuthState({ 
+                setAuthState({authState,  
                     username: response.data.username, 
                     id: response.data.id, 
                     status: true 

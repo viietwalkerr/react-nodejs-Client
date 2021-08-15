@@ -11,7 +11,7 @@ function Home() {
 
     const [listOfPosts, setListOfPosts] = useState([]);
     const [likedPosts, setLikedPosts] = useState([]);
-    const authState = useContext(AuthContext);
+    const { authState } = useContext(AuthContext);
     let history = useHistory();
 
     useEffect(() => {
@@ -25,7 +25,7 @@ function Home() {
                 // { 
                 //     headers: { accessToken: localStorage.getItem("accessToken")}
                 // }
-                { headers: {userId: authState.id}}
+                { headers: {userId: authState.id, username: authState.username}}
             ).then((response) => {
                 // contains 2 arrays, listsOfPosts and likedPosts
                 setListOfPosts(response.data.listOfPosts);
