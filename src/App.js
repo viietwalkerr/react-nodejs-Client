@@ -68,7 +68,12 @@ function App() {
           status: true,
         });
       }
-    });  
+    });
+    
+    axios.get(baseUrl +"auth/login").then((response) => {
+      console.log("login get req");
+      console.log(response);
+    })
   },[]);
 
   window.onscroll = function() {scrollFunction()};
