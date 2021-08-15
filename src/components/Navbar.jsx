@@ -88,7 +88,6 @@ function Navbar() {
                             <NavLink activeClassName="topNavActive" to="/">Home</NavLink>
                             <NavLink activeClassName="topNavActive" to="/about">About</NavLink>
                             
-                            <NavLink activeClassName="topNavActive" to="/post/1">Post</NavLink>
                             <NavLink activeClassName="topNavActive" to="/createpost">Create Post</NavLink>
                         </>
                     )}
