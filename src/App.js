@@ -17,6 +17,7 @@ import About from './pages/About';
 import Settings from './pages/Settings';
 import ChangePassword from './pages/ChangePassword';
 import NotFound from './pages/NotFound';
+import Cookies from 'js-cookie';
 
 axios.defaults.withCredentials = true;
 
@@ -48,13 +49,18 @@ function App() {
 
   useEffect(() => {
     axios.get(baseUrl +"auth/token", 
+
+    // #### IDEA: create header and assign accesstoken header to cookies.get
+      {
+        headers: { accessToken: Cookies.get("access-token")}
+      }
     // {
       // headers: {
       //   accessToken: localStorage.getItem("accessToken")
       // }
      
     // },
-     [])
+     )
     .then((response) => {
       console.log("checked for token");
       console.log(response);

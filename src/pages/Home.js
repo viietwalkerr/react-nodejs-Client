@@ -5,6 +5,7 @@ import { useHistory, Link } from 'react-router-dom';
 import { baseUrl } from '../helpers/const';
 import { AuthContext } from '../helpers/AuthContext';
 import * as AiIcons from 'react-icons/ai';
+import Cookies from 'js-cookie';
 
 
 function Home() {
@@ -14,6 +15,8 @@ function Home() {
     const { authState } = useContext(AuthContext);
     let history = useHistory();
 
+    axios.defaults.withCredentials = true;
+
     useEffect(() => {
         //redirect 
         // if (!localStorage.getItem("accessToken")) {
@@ -22,10 +25,11 @@ function Home() {
             // history.push("/");            
         } else {
             axios.get(baseUrl + "posts", 
-                // { 
+                { 
                 //     headers: { accessToken: localStorage.getItem("accessToken")}
-                // }
-                { headers: {userId: authState.id, username: authState.username}}
+                    headers: { accessToken: Cookies.get("access-token") }
+                }
+                // { headers: {userId: authState.id, username: authState.username}}
             ).then((response) => {
                 // contains 2 arrays, listsOfPosts and likedPosts
                 setListOfPosts(response.data.listOfPosts);
