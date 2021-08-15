@@ -60,6 +60,7 @@ function App() {
       console.log(response);
       // Checks for errors for login state
       if (response.data.error) {
+        console.log(response.data.error);
         setAuthState({...authState, status: false}); //only change 1 
       } else {
         setAuthState({
