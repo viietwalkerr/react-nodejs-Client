@@ -44,7 +44,7 @@ function Home() {
         axios.post(
             baseUrl + "likes", 
             { PostId: postId }, 
-            { headers: { accessToken: localStorage.getItem("access-token")}}
+            { headers: { accessToken: Cookies.get("access-token")}}
         ).then((response) => {
             // Grab list, modify it, then set state to modified list (update)
             setListOfPosts(
