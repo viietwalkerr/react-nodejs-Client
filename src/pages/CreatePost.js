@@ -36,7 +36,8 @@ function CreatePost() {
         axios.post(
             baseUrl + "posts", data, 
             {
-                headers: { accessToken: localStorage.getItem("accessToken") },
+                // headers: { accessToken: localStorage.getItem("accessToken") },
+                headers: { accessToken: Cookies.get("access-token") },
             }
         ).then((response) => {
             history.push("/");

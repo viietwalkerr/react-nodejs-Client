@@ -58,7 +58,10 @@ function Post() {
             // {
             //     headers: {accessToken: localStorage.getItem("accessToken")}
             // }
-            { headers: {userId: authState.id}}
+            { 
+                // headers: {userId: authState.id}
+                headers: { accessToken: Cookies.get("access-token") },
+            }
              
             // { withCredentials: true }
         )
@@ -176,7 +179,8 @@ function Post() {
         axios.post(baseUrl + "likes", 
             { PostId: postId }, 
             { 
-                headers: { accessToken: localStorage.getItem("accessToken") } 
+                // headers: { accessToken: localStorage.getItem("accessToken") } 
+                headers: { accessToken: Cookies.get("access-token") },
             }
         ).then((response) => {
             setListOfPosts(
@@ -214,7 +218,8 @@ function Post() {
                 PostId: id
             },
             {
-                headers: { accessToken: localStorage.getItem("accessToken") },
+                // headers: { accessToken: localStorage.getItem("accessToken") },
+                headers: { accessToken: Cookies.get("access-token") },
             }
         ).then((response) => {
             if (response.data.error){
@@ -232,7 +237,8 @@ function Post() {
         // use ` to add js variables
         axios.delete(baseUrl + `/comments/${id}`, 
             {
-                headers: {accessToken: localStorage.getItem("accessToken")},
+                // headers: {accessToken: localStorage.getItem("accessToken")},
+                headers: { accessToken: Cookies.get("access-token") },
             }
         )
         .then(()=> {
@@ -248,7 +254,8 @@ function Post() {
     const deletePost = (id) => {
         axios.delete(baseUrl + `/posts/${id}`, 
             {
-                headers: { accessToken: localStorage.getItem("accessToken") },
+                // headers: { accessToken: localStorage.getItem("accessToken") },
+                headers: { accessToken: Cookies.get("access-token") },
             }
         )
         .then(() => {
@@ -272,7 +279,8 @@ function Post() {
                     id: id
                 },
                 {
-                    headers: { accessToken: localStorage.getItem("accessToken")}
+                    // headers: { accessToken: localStorage.getItem("accessToken")}
+                    headers: { accessToken: Cookies.get("access-token") },
                 }
             );
             setPostObject({...postObject, title: newTitle});
@@ -284,7 +292,8 @@ function Post() {
                     id: id
                 },
                 {
-                    headers: { accessToken: localStorage.getItem("accessToken")}
+                    // headers: { accessToken: localStorage.getItem("accessToken")}
+                    headers: { accessToken: Cookies.get("access-token") },
                 }
             );
             setPostObject({...postObject, postText: newPostText});

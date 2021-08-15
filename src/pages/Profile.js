@@ -59,7 +59,8 @@ function Profile() {
         } else {
             axios.get(baseUrl + "posts",
                 { 
-                    headers: { accessToken: localStorage.getItem("accessToken")}
+                    // headers: { accessToken: localStorage.getItem("accessToken")}
+                    headers: { accessToken: Cookies.get("access-token") },
                 }
             ).then((response) => {
                 // contains 2 arrays, listsOfPosts and likedPosts
@@ -73,7 +74,10 @@ function Profile() {
     const likePost = (postId) => {
         axios.post(baseUrl + "likes", 
             { PostId: postId }, 
-            { headers: { accessToken: localStorage.getItem("accessToken")}}
+            { 
+                // headers: { accessToken: localStorage.getItem("accessToken")}
+                headers: { accessToken: Cookies.get("access-token") },
+            }
         ).then((response) => {
             // Grab list, modify it, then set state to modified list (update)
             setListOfPosts(
