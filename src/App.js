@@ -57,6 +57,7 @@ function App() {
      [])
     .then((response) => {
       console.log("checked for token");
+      console.log(response);
       // Checks for errors for login state
       if (response.data.error) {
         setAuthState({...authState, status: false}); //only change 1 
