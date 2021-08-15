@@ -48,7 +48,7 @@ function Login() {
                 setLoginStatus(response.data.error);
             } else {
                 console.log(response);
-                setLoginStatus(response.data.username);
+                setLoginStatus(response.username);
                 setAuthState({authState,  
                     username: response.data.username, 
                     id: response.data.id, 
