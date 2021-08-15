@@ -5,6 +5,7 @@ import { useHistory } from 'react-router-dom';
 import { AuthContext } from '../helpers/AuthContext';
 import { baseUrl } from '../helpers/const';
 import * as FaIcons from 'react-icons/fa';
+import Cookies from 'js-cookie';
 
 function Login() {
 
@@ -47,11 +48,13 @@ function Login() {
                 console.log(response.data.error);
                 setLoginStatus(response.data.error);
             } else {
+                console.log("Response from Login post");
                 console.log(response);
-                setLoginStatus(response.username);
+                Cookies.set("access-token", response.data.accessToken);
+                setLoginStatus(response.data.user.username);
                 setAuthState({authState,  
-                    username: response.data.username, 
-                    id: response.data.id, 
+                    username: response.data.user.username, 
+                    id: response.data.user.id, 
                     status: true 
                 });
                 history.push("/about");
@@ -80,9 +83,10 @@ function Login() {
             } else {
                 setLoginStatus(response.data.username)
                 // localStorage.setItem("accessToken", response.data.token);
+                Cookies.set(response.data.accessToken);
                 setAuthState({ 
-                    username: response.data.username, 
-                    id: response.data.id, 
+                    username: response.data.user.username, 
+                    id: response.data.user.id, 
                     status: true 
                 });
                 history.push("/about");
