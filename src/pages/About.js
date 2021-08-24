@@ -10,7 +10,9 @@ function About() {
                     <div className="content">
                         <p>I had previously created a website using my prior <br />
                         knowledge in HTML, CSS, JAVASCRIPT and PHP <br />
-                        I had recently started self-learning REACT</p>
+                        I had recently started self-learning REACT.</p>
+
+                        <p>This webapp utilises React, NodeJS, Express and MySQL</p>
                     </div>
                     
                 {/* </div> */}

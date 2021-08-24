@@ -140,11 +140,11 @@ function Profile() {
                                     Posts
                                 </div>
                                 <div className="item">
-                                    <span>584</span>
+                                    <span>0</span>
                                     Followers
                                 </div>
                                 <div className="item">
-                                    <span>423</span>
+                                    <span>0</span>
                                     Following
                                 </div>
                             </div>
