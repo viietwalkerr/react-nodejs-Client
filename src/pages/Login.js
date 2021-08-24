@@ -99,9 +99,9 @@ function Login() {
             <div className="background">
                 <main>
                     <div className="formBox">
-                        <h2>Login</h2>
-                        <p>Please enter your login details</p>
-                            <form netlify>
+                        {/* <h2>Login</h2>
+                        <p>Please enter your login details</p> 
+                             <form netlify>
                                 <div className="textbox">
                                     <i className="fas fa-user"></i>
                                     <span className="icon">
@@ -131,14 +131,16 @@ function Login() {
                                 <button type='submit' className="rainbowButton" onClick={login}>
                                     <span>Sign In</span>
                                 </button>
-                            </form>
+                            </form> */}
                             <Formik 
                                 initialValues={initialValues}
                                 onSubmit={loginSubmit}
                             >
                                 <Form netlify>
                                     <div className="formBox">
-                                        <h2>Login Formik</h2>
+                                        {/* <h2>Login Formik</h2> */}
+                                        <h2>Login</h2>
+                                        <p>Please enter your login details</p>
                                         <div className="textbox">
                                             <span className="icon">
                                                 <FaIcons.FaUserAlt />
