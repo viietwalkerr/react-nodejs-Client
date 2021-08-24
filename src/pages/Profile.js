@@ -3,7 +3,7 @@ import { useParams, useHistory } from "react-router-dom";
 import { baseUrl } from '../helpers/const';
 import axios from 'axios';
 import * as AiIcons from 'react-icons/ai';
-import  profileDefault from '../uploads/profileDefault.jpg';
+import  profiledefault from '../uploads/profiledefault.jpg';
 import Cookies from 'js-cookie';
 
 // Tabs for profile
@@ -119,7 +119,7 @@ function Profile() {
                         <div className="card-header">
                             <div className="pic">
                             {/* <img src='UPLOADS/".$username."/".$username.".jpg'> */}
-                                <img src={profileDefault} alt="missing"/>
+                                <img src={profiledefault} alt="missing"/>
                                 {/* <img src="ASSETS/images/smoking panda.jpg" alt="John"> */}
                             </div>
                             <div className="name">
