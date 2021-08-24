@@ -4,7 +4,7 @@ import { baseUrl } from '../helpers/const';
 import axios from 'axios';
 import * as AiIcons from 'react-icons/ai';
 import profiledefault from '../uploads/profiledefault.jpg';
-import profilealt from '../assets/profiledefaultuser.jpg';
+import profilealt from './assets/profiledefaultuser.jpg';
 import Cookies from 'js-cookie';
 
 // Tabs for profile
