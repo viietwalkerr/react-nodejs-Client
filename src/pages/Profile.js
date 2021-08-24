@@ -4,7 +4,7 @@ import { baseUrl } from '../helpers/const';
 import axios from 'axios';
 import * as AiIcons from 'react-icons/ai';
 import profiledefault from '../uploads/profiledefault.jpg';
-import profilealt from './assets/profiledefaultuser.jpg';
+import profilealt from '../assets/profiledefaultuser.jpg';
 import Cookies from 'js-cookie';
 
 // Tabs for profile
@@ -120,7 +120,7 @@ function Profile() {
                         <div className="card-header">
                             <div className="pic">
                             {/* <img src='UPLOADS/".$username."/".$username.".jpg'> */}
-                                <img src={profiledefault} alt={profilealt}/>
+                                <img src={profiledefault} alt="https://icons-for-free.com/iconfiles/png/512/profile+user+icon-1320166082804563970.png"/>
                                 {/* <img src="ASSETS/images/smoking panda.jpg" alt="John"> */}
                             </div>
                             <div className="name">
@@ -136,7 +136,7 @@ function Profile() {
                         <div className="card-footer">
                             <div className="numbers">
                                 <div className="item">
-                                    <span>120</span>
+                                    <span>{listOfPosts.length}</span>
                                     Posts
                                 </div>
                                 <div className="item">
