@@ -2,10 +2,11 @@ import React, { useState, useContext, useEffect } from 'react';
 import axios from 'axios';
 import { Formik, Form, Field } from "formik";
 import { useHistory } from 'react-router-dom';
-import { AuthContext } from '../helpers/AuthContext';
-import { baseUrl } from '../helpers/const';
+import { AuthContext } from '../../helpers/AuthContext';
+import { baseUrl } from '../../helpers/const';
 import * as FaIcons from 'react-icons/fa';
 import Cookies from 'js-cookie';
+import FormComponent from '../../components/Layout/FormComponent';
 
 function Login() {
 
@@ -17,12 +18,12 @@ function Login() {
 
     let history = useHistory();
 
-    axios.defaults.withCredentials = true;
+    // axios.defaults.withCredentials = true;
 
-    const initialValues = {
-        username: "",
-        password: ""
-    };
+    // const initialValues = {
+    //     username: "",
+    //     password: ""
+    // };
 
     // const loginSubmit = (data) => {
     //     axios.post(baseUrl + "auth/login", data, {crossDomain: true})
@@ -40,7 +41,9 @@ function Login() {
 
     // new stuff
     const loginSubmit = (data) => {
-        axios.post(baseUrl + "auth/login", data, {crossDomain: true})
+        console.log("TEST2: ", data);
+        // axios.post(baseUrl + "auth/login", data, {crossDomain: true})
+        axios.post('http://localhost:3001/auth/login', data)
         .then((response) => {
             console.log(response.data)
             if (response.data.error) {
@@ -98,7 +101,7 @@ function Login() {
     return (
             <div className="background">
                 <main>
-                    <div className="formBox">
+                    {/* <div className="formBox"> */}
                         {/* <h2>Login</h2>
                         <p>Please enter your login details</p> 
                              <form netlify>
@@ -132,14 +135,14 @@ function Login() {
                                     <span>Sign In</span>
                                 </button>
                             </form> */}
-                            <Formik 
+                            {/* <Formik 
                                 initialValues={initialValues}
                                 onSubmit={loginSubmit}
                             >
                                 <Form netlify>
-                                    <div className="formBox">
+                                    <div className="formBox"> */}
                                         {/* <h2>Login Formik</h2> */}
-                                        <h2>Login</h2>
+                                        {/* <h2>Login</h2>
                                         <p>Please enter your login details</p>
                                         <div className="textbox">
                                             <span className="icon">
@@ -169,9 +172,14 @@ function Login() {
                                         </button>
                                     </div>
                                 </Form>
-                            </Formik>
+                            </Formik> */}
                            
-                    </div>
+                    {/* </div> */}
+                    <FormComponent 
+                        onSubmit={(data) => loginSubmit(data)
+                        }
+                        type="login"
+                    />
                 </main>
             </div>
     );

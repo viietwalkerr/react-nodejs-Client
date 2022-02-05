@@ -1,17 +1,18 @@
 import React from 'react'
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import { baseUrl } from '../helpers/const';
+import { baseUrl } from '../../helpers/const';
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 import * as Yup from "yup";
 import * as FaIcons from 'react-icons/fa';
 import * as AiIcons from 'react-icons/ai';
+import FormComponent from '../../components/Layout/FormComponent';
 
 
 
 function Register() {
 
-    axios.defaults.withCredentials = true;
+    // axios.defaults.withCredentials = true;
 
     let history = useHistory();
     const initialValues = {
@@ -47,7 +48,7 @@ function Register() {
     return (
         <div className="background">
             <main>
-                <Formik 
+                {/* <Formik 
                     initialValues={initialValues}
                     onSubmit={onSubmit}
                     validationSchema={validationSchema}
@@ -121,7 +122,7 @@ function Register() {
                                         name="password" 
                                         placeholder="Password"
                                     />
-                                </div>
+                                </div> */}
                                     {/* <div className="textbox">
                                     <ErrorMessage name="confirmPassword" component="span" />
                                         <span className="icon">
@@ -136,12 +137,16 @@ function Register() {
                                             placeholder="Confirm Password"
                                         />
                                     </div> */}
-                            <button type="submit" className="rainbowButton">
+                            {/* <button type="submit" className="rainbowButton">
                                 <span>Register</span>
                             </button>
                         </div>
                     </Form>
-                </Formik>
+                </Formik> */}
+                <FormComponent 
+                    onSubmit={(data) => onSubmit(data)}
+                    type="register"
+                />
             </main>
         </div> 
     )

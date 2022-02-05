@@ -1,0 +1,153 @@
+@import "../../styling/globalVariables";
+
+.post {
+    width: 400px;
+    height: 300px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    margin-top: 50px;
+    border: 1px solid lightgray;
+    font-family: Arial, Helvetica, sans-serif;
+  
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+
+    &:hover {
+        box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+        cursor: pointer;
+    }
+    .title {
+        flex: 20%;
+        border-bottom: 1px solid lightgray;
+        background-color: $black;
+        display: grid;
+        place-content: center;
+        color: white;
+    }
+    &:nth-child(even) .title {
+        // background-color: purple;
+    }
+    .body {
+        background-color: rgba(0, 0, 0, 0.8);
+        flex: 60%;
+        display: grid;
+        place-content: center;
+        color: $white;
+    }
+    .post-footer {
+        flex: 20%;
+        border-top: 1px solid lightgray;
+        display: flex;
+        align-items: center;
+        padding-left: 15px;
+        padding-right: 15px;
+        // background-color: dodgerblue;
+        background-color: $black;
+        color: white;
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+
+        .username {
+            text-decoration: none;
+            color: white;
+        }
+        .likeButtons {
+            flex: 50%;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            
+            .likeIcon {
+                width: 2em;
+                size: 28px;
+            }
+        }
+    }
+    &#individual {
+        height: 500px;
+        width: 600px;
+    
+        .title {
+            font-size: $font-size-h2;
+        }
+        .body {
+            font-size: $font-size-main-content;
+        }
+        .footer {
+            font-size: $font-size-h2;
+
+            .likeButtons {
+                flex: 50%;
+                display: flex;
+                justify-content: flex-end;
+                align-items: center;
+
+                .likeIcon {
+                    width: 2em;
+                    size: 28px;
+                }
+            }
+        }
+    }
+}
+  
+
+  
+//   #individual .title,
+//   #individual .footer {
+//     font-size: 30px;
+//   }
+  
+//   #individual .body {
+//     font-size: 25px;
+//   }
+  
+//   #individual .footer .likeButtons {
+//     flex: 50%;
+//     display: flex;
+//     justify-content: flex-end;
+//     align-items: center;
+//   }
+  
+//   #individual .footer .likeButtons .likeIcon {
+//     width: 2em;
+//     size: 28px;
+//   }
+  
+  
+// .post:hover {
+//     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+//     cursor: pointer;
+// }
+// .post .title {
+//     flex: 20%;
+//     border-bottom: 1px solid lightgray;
+//     background-color: dodgerblue;
+//     display: grid;
+//     place-content: center;
+//     color: white;
+// }
+  
+// .post:nth-child(even) .title {
+//     background-color: purple;
+// }
+  
+// .post .body {
+//     background-color: rgba(0, 0, 0, 0.8);
+//     flex: 60%;
+//     display: grid;
+//     place-content: center;
+// }
+  
+// .post .footer {
+//     flex: 20%;
+//     border-top: 1px solid lightgray;
+//     display: flex;
+//     align-items: center;
+//     padding-left: 15px;
+//     padding-right: 15px;
+//     background-color: dodgerblue;
+//     color: white;
+//     border-bottom-left-radius: 10px;
+//     border-bottom-right-radius: 10px;
+// }

@@ -1,0 +1,47 @@
+@import "../../../../styling/globalVariables";
+
+.sub {
+    
+    color: $black;
+    background-color: $grey-light;
+    width: 120%;
+    // height: 60vh;
+    padding: $padding-large;
+
+    &-container {
+        margin-top: $margin-top;
+        .subcontent {
+            padding: $padding-large;
+            width: 80%;
+            display: inline-flex;
+            flex-direction: row;
+            justify-content: space-between;
+
+            .section {
+                flex: 1;
+                padding: $padding-medium;
+                text-align: left;
+            }
+    
+            .first-area {
+                // padding: 
+                // max-width: 33%;
+                flex: 1;
+                // flex-grow: 1;
+            }
+            .second-area {
+                // max-width: 33%;
+                flex: 1;
+                // flex-grow: 1;
+            }
+            .third-area {
+                // max-width: 33%;
+                flex: 1;
+                // flex-grow: 1;
+
+            }
+        }
+    }
+
+    
+}

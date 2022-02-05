@@ -1,11 +1,13 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { baseUrl } from '../helpers/const';
-import { AuthContext } from "../helpers/AuthContext";
+import { baseUrl } from '../../helpers/const';
+import { AuthContext } from "../../helpers/AuthContext";
 import axios from 'axios';
 import * as AiIcons from 'react-icons/ai';
 import Cookies from 'js-cookie';
-
+import PostComponent from "../../components/Post/PostComponent";
+import Comments from "../../components/Post/Comments";
+import Page from '../../components/Layout/Common/Page/Page';
 
 function Post() {
     let { id } = useParams();
@@ -28,7 +30,7 @@ function Post() {
             // setLikedPosts(response.data.Likes);
             // alert(postObject.Likes);
             // setLikedPosts(response.data.Likes.map((like)=> {
-            //     return like.UserId;
+            //     return like.UserId;r
             // }));
 
             // setAfterRender(false);
@@ -212,7 +214,7 @@ function Post() {
     };
         
     const addComment = () => {
-        axios.post(baseUrl + "/comments", 
+        axios.post(baseUrl + "comments", 
             {
                 commentBody: newComment, 
                 PostId: id
@@ -235,7 +237,7 @@ function Post() {
 
     const deleteComment = (id) => {
         // use ` to add js variables
-        axios.delete(baseUrl + `/comments/${id}`, 
+        axios.delete(baseUrl + `comments/${id}`, 
             {
                 // headers: {accessToken: localStorage.getItem("accessToken")},
                 headers: { accessToken: Cookies.get("access-token") },
@@ -301,12 +303,12 @@ function Post() {
     };
 
     return (
-        
-        <div className="background">
-            <main>
+        <Page>
+        {/* // <div className="background">
+        //     <main> */}
                 <h2>Post #{id}</h2>
                 <div className="postPage">
-                    <div className="leftSide">
+                    {/* <div className="leftSide">
                         {listOfPosts.map((value) => {
                             if (value.id === postObject.id) {
                             return (
@@ -385,10 +387,54 @@ function Post() {
                                 );
                             })}
                         </div>
-                    </div>
+                    </div> */}
+
+
+                    {listOfPosts.map((value) => {
+                        if (value.id === postObject.id) {
+                            return (
+                                <>
+                                    <PostComponent 
+                                        id="individual"
+                                        onClickTitle={authState.username === postObject.username ? () => {editPost("title")} : undefined
+                                            // if (authState.username === postObject.username){
+                                            //     editPost("title");
+                                            // }
+                                        }
+                                        onClickBody={() => {
+                                            if (authState.username === postObject.username){
+                                                editPost("body");
+                                            }
+                                        }}
+                                        onClickDelete={() => {
+                                            deletePost(postObject.id);
+                                        }}
+                                        onClickLike={() => {likePost(value.id)}}
+                                        likedList={likedPosts}
+                                        post={value}
+                                    />
+                                    <Comments 
+                                        commentsList={comments}
+                                        newComment={newComment}
+                                        addComment={addComment}
+                                        deleteComment={deleteComment}
+                                        onChange={(value) =>setNewComment(value)}
+                                        // onChange={()}
+                                    />
+                                </>
+                            )
+                        }
+                    })}
+                    
                 </div>
-            </main>
-        </div>
+                {/* {listOfPosts.map((value))}
+                        {listOfPosts.find((post) => {
+                            post.id === postObject.id && 
+                                <PostComponent />
+                        })} */}
+            {/* </main>
+        </div> */}
+        </Page>
     )
 }
 

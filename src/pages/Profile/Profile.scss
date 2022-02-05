@@ -1,0 +1,72 @@
+@import "../../styling/globalVariables";
+
+.profile {
+    .user-posts {
+        justify-content: space-evenly;
+        display: flex;
+        flex-wrap: wrap;
+        // height: 100%;
+        padding-bottom: 30px;
+    }
+    /* Style the tab */
+    .tab {
+        margin: auto;
+        // justify-self: center;
+        display: flex;
+        justify-content: center;
+        height: 100%;
+        flex-direction: column;
+
+
+        .tab-item {
+            // width: 50%;
+            overflow: hidden;
+            border: 1px solid #ccc;
+            background-color: #f1f1f1;
+            justify-content: space-evenly;
+            border-bottom-left-radius: 8px;
+            border-bottom-right-radius: 8px;
+
+            .tablinks {
+                width: 33.33%;
+            }
+
+            button {
+                background-color: inherit;
+                color: black;
+                float: left;
+                border: none;
+                outline: none;
+                cursor: pointer;
+                padding: 14px 16px;
+                transition: 0.3s;
+                font-size: 17px;
+
+                &:hover {
+                    background-color: #ddd;
+                }
+                &.active {
+                    background-color: #ccc;
+                }
+            }
+        }
+
+        /* Style the tab content */
+        .tabcontent {
+            // width: 50%;
+            display: none;
+            padding: 6px 12px;
+            border: 1px solid #ccc;
+            border-top: none;
+            background-color: #363534;
+
+            ul li {
+                list-style: none;
+                
+            }
+            &.active {
+                display: inline-block;
+            }
+        }
+    }
+}

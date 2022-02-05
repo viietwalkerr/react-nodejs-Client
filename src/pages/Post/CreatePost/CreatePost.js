@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { useHistory } from 'react-router-dom';
-import { baseUrl } from '../helpers/const';
+import { baseUrl } from '../../../helpers/const';
 import axios from 'axios';
 import * as Yup from 'yup';
 import * as FaIcons from 'react-icons/fa';
 import Cookies from 'js-cookie';
+import FormComponent from '../../../components/Layout/FormComponent';
 
 
 function CreatePost() {
@@ -86,51 +87,50 @@ function CreatePost() {
                     </Formik>
                     
                 </div> */}
-                    <div className="createPostPage">
+                {/* <div className="createPostPage">
                     <Formik 
                         initialValues={initialValues} 
                         onSubmit={onSubmit} 
                         validationSchema={validationSchema}
                     >
                         <Form className="formBox">
-                        <h2> Create Post </h2>
-                            
-
+                            <h2> Create Post </h2>
                             <div className="textbox">
-                                    <ErrorMessage name="title" component="span" className="error" />
-                                        <br></br>
-                                        <span className="icon">
-                                            <FaIcons.FaInfo />
-                                        </span>
-                                        <Field 
-                                            autoComplete="off"
-                                            id=""
-                                            className="inputField" 
-                                            name="title" 
-                                            placeholder="Title"
-                                        />
+                                <ErrorMessage name="title" component="span" className="error" />
+                                <br></br>
+                                <span className="icon">
+                                    <FaIcons.FaInfo />
+                                </span>
+                                <Field 
+                                    autoComplete="off"
+                                    id=""
+                                    className="inputField" 
+                                    name="title" 
+                                    placeholder="Title"
+                                />
                             </div>
                             <div className="textbox">
-                                    <ErrorMessage name="post-" component="span" className="error"/>
-                                        <br />
-                                        <span className="icon">
-                                            <FaIcons.FaRegEdit />
-                                        </span>
-                                        <Field 
-                                            autoComplete="off"
-                                            id=""
-                                            className="inputField" 
-                                            name="postText" 
-                                            placeholder="Post"
-                                        />
-                                       
+                                <ErrorMessage name="post-" component="span" className="error"/>
+                                <br />
+                                <span className="icon">
+                                    <FaIcons.FaRegEdit />
+                                </span>
+                                <Field 
+                                    autoComplete="off"
+                                    id=""
+                                    className="inputField" 
+                                    name="postText" 
+                                    placeholder="Post"
+                                />                        
                             </div>
                             <button className="rainbowButton" type="submit"><span>Create Post</span></button>
-                        </Form>
-                        
+                        </Form>        
                     </Formik>
-                    
-                </div>
+                </div> */}
+                <FormComponent 
+                    type={"create post"}
+                    onSubmit={(value) => onSubmit(value)}
+                />
             </main>
         </div>
     )

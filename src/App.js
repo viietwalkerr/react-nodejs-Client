@@ -5,21 +5,24 @@ import { AuthContext } from './helpers/AuthContext';
 import { baseUrl } from './helpers/const';
 import axios from 'axios';
 import Navbar from './components/Navbar';
-import Home from './pages/Home';
-import CreatePost from './pages/CreatePost';
-import Post from './pages/Post';
-import Login from './pages/Login';
+import Home from './pages/Home/Home';
+import CreatePost from './pages/Post/CreatePost/CreatePost';
+import Post from './pages/Post/Post';
+import Login from './pages/Login/Login';
 import Logout from './pages/Logout';
-import Register from './pages/Register';
+import Register from './pages/Register/Register';
 import Success from './pages/Success';
-import Profile from './pages/Profile';
-import About from './pages/About';
-import Settings from './pages/Settings';
+import Profile from './pages/Profile/Profile';
+import About from './pages/About/About';
+import Settings from './pages/Settings/Settings';
 import ChangePassword from './pages/ChangePassword';
 import NotFound from './pages/NotFound';
 import Cookies from 'js-cookie';
+import RainbowButton from './components/Input/RainbowButton/RainbowButton';
+import NeonButton from './components/Input/NeonButton/NeonButton';
+import Footer from './components/Layout/Common/Footer/Footer';
 
-axios.defaults.withCredentials = true;
+// axios.defaults.withCredentials = true;
 
 function scrollFunction()
 {
@@ -46,6 +49,16 @@ function App() {
     id: 0,
     status: false,
   });
+
+  // useEffect(() => {
+  //   console.log("cookie check");
+  //   console.log(Cookies.get("access-token"));
+  //   if (Cookies.get("access-token")){
+  //       setAuthState({...authState, status: true});
+  //   } else {
+  //       setAuthState({...authState, status: false});
+  //   }
+  // }, []);
 
   useEffect(() => {
     axios.get(baseUrl +"auth/token", 
@@ -75,7 +88,7 @@ function App() {
           status: true,
         });
       }
-    });
+    },);
     
     axios.get(baseUrl +"auth/login").then((response) => {
       console.log("login get req");
@@ -87,9 +100,11 @@ function App() {
 
   return (
     <div className="App">
-      <button onClick={topFunction} id="backToTopBtn" className="rainbowButton" title="Go to top">
+      {/* <button onClick={topFunction} id="backToTopBtn" className="rainbowButton" title="Go to top">
         <span>Back to Top</span>
-      </button>
+      </button> */}
+      <NeonButton onClick={topFunction} id="backToTopBtn" title="Back to Top" />
+      {/* <RainbowButton onClick={topFunction} id="backToTopBtn" title="Back to Top"/> */}
       <AuthContext.Provider value={{ authState, setAuthState }}>
         <Router>
           <Navbar authState={authState} setAuthState={setAuthState}/>
@@ -109,6 +124,7 @@ function App() {
             <Route path="*" exact component={NotFound} />
           </Switch>
         </Router>
+        <Footer />
       </AuthContext.Provider>
     </div>
   );

@@ -1,0 +1,123 @@
+@import "../styling/globalVariables";
+
+.sidenav {
+    background-color: #060b26;
+    width: 250px;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    left: -100%;
+    transition: 850ms;
+    z-index: 4;
+
+    &.active {
+        left: 0;
+        transition: 350ms;
+    
+    }
+    .sidenav-items {
+        width: 100%;
+
+        .sidenav-toggle {
+            background-color: #060b26;
+            width: 100%;
+            height: 80px;
+            margin-left: 1rem;
+            color: $blue-alt;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+
+            .menu-cross {
+                margin-left: 1rem;
+                font-size: 2rem;
+                margin-top: 1.5rem;
+                width: 30px;
+                height: 30px;
+                color: $blue-alt;
+                &:hover {
+                    cursor: pointer;
+                }
+            }
+        }
+        .nav-text {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            padding: 8px 0px 8px 16px;
+            list-style: none;
+            height: 60px;
+            color: $white; 
+
+            a {
+                text-decoration: none;
+                color: $white-alt;
+                font-size: 18px;
+                width: 95%;
+                height: 100%;
+                display: flex;
+                align-items: center;
+                padding: 0 16px;
+                border-radius: 4px;
+                
+                &:hover {
+                    color: #1a83ff;
+                }
+                svg {
+                    color: $blue-alt; /* FIX IT LATER */
+                    width: 30px;
+                    height: 30px;
+                }
+                span {
+                    padding-left: 10px;
+                
+                    text-decoration: none;
+                    color: $white-alt;
+                    font-size: 18px;
+                    width: 95%;
+                    height: 100%;
+                    display: flex;
+                    align-items: center;
+                    padding: 0 16px;
+                    border-radius: 4px;
+
+                    .active {
+                        color: blue;
+                    }
+                    &:hover {
+                        color: $white;
+                        text-shadow: 0 0 10px $white,
+                        0 0 20px $white,
+                        0 0 40px $white,
+                        0 0 80px $white,
+                        0 0 100px $white,
+                        0 0 140px $white;
+                    }
+                }
+            }
+        }
+    }
+    .sideNavActive {
+        /* background-color: red; */
+        color: blue;
+    }
+    
+    .sideNavActive span {
+        color: $white;
+        text-shadow: 0 0 10px $white,
+        0 0 20px $white,
+        0 0 40px $white,
+        0 0 80px $white,
+        0 0 100px $white,
+        0 0 140px $white;
+    }
+}
+
+
+
+
+
+
+

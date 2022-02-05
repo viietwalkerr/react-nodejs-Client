@@ -2,10 +2,16 @@ import React/*, { useContext }*/ from 'react';
 import axios from 'axios';
 import { useEffect, useState, useContext } from 'react';
 import { useHistory, Link } from 'react-router-dom';
-import { baseUrl } from '../helpers/const';
-import { AuthContext } from '../helpers/AuthContext';
+import { baseUrl } from '../../helpers/const';
+import { AuthContext } from '../../helpers/AuthContext';
 import * as AiIcons from 'react-icons/ai';
 import Cookies from 'js-cookie';
+import "./Home.scss";
+import Page from "../../components/Layout/Common/Page/Page";
+import NeonButton from '../../components/Input/NeonButton/NeonButton';
+import RainbowButton from '../../components/Input/RainbowButton/RainbowButton';
+import PostComponent from "../../components/Post/PostComponent";
+import Comment from "../../components/Post/Comments";
 
 
 function Home() {
@@ -15,15 +21,17 @@ function Home() {
     const { authState } = useContext(AuthContext);
     let history = useHistory();
 
-    axios.defaults.withCredentials = true;
+    // axios.defaults.withCredentials = true;
 
     useEffect(() => {
         //redirect 
         // if (!localStorage.getItem("accessToken")) {
         //     history.push("/login");
-        if (authState.status === false) {
-            // history.push("/");            
-        } else {
+        // if (authState.status === false) {
+        //     console.log("TESTING");
+        //     console.log(authState);
+        //     // history.push("/");            
+        // } else {
             axios.get(baseUrl + "posts", 
                 { 
                 //     headers: { accessToken: localStorage.getItem("accessToken")}
@@ -32,13 +40,14 @@ function Home() {
                 // { headers: {userId: authState.id, username: authState.username}}
             ).then((response) => {
                 // contains 2 arrays, listsOfPosts and likedPosts
+                console.log(response.data);
                 setListOfPosts(response.data.listOfPosts);
                 setLikedPosts(response.data.likedPosts.map((like) => {
                     return like.PostId;
                 }));
             });
-        }
-    }, [history]);
+        // }
+    }, []);
     
     const likePost = (postId) => {
         axios.post(
@@ -79,11 +88,13 @@ function Home() {
         });
     }
     return (
-            <div className="background">
-                <main className="posts">
-                    <h2>Posts Feed</h2>
-                    {listOfPosts.map((value, key) => { 
-                        return (
+        // <div className="background">
+        //     <main className="posts">
+        <Page>
+            <div className='home'>
+                <h2>Posts Feed</h2>
+                {/* {listOfPosts.map((value, key) => { 
+                    return (
                         <div key={key} className="post">
                             <div className="title"> 
                                 {value.title} 
@@ -113,9 +124,23 @@ function Home() {
                             </div> 
                         </div>
                         );
-                    })}
-                </main>
+                    })} */}
+                {listOfPosts.map((value, key) => {
+                    return (
+                        <PostComponent 
+                            key={key}
+                            onClickTitle={() => {history.push(`/post/${value.id}`)}}
+                            onClickBody={() => {history.push(`/post/${value.id}`)}}
+                            onClickLike={() => {likePost(value.id)}}
+                            post={value}
+                            likedList={likedPosts}
+                        />
+                    )
+                })}
             </div>
+        </Page>
+        //     </main>
+        // </div>
     )
 }
 

@@ -1,17 +1,16 @@
 import React from 'react'
+import Page from '../components/Layout/Common/Page/Page'
 
 function NotFound() {
     return (
-            <div className="background">
-                <main>
-                    <div className="content">
-                        <h2>404 Not Found</h2> <br />
-                        <p>This page is coming soon! <br />
-                            Sorry for the inconvenience!
-                        </p>
-                    </div>
-                </main>
+        <Page>
+            <div className="content">
+                <h2>404 Not Found</h2> <br />
+                <p>This page is coming soon! <br />
+                    Sorry for the inconvenience!
+                </p>
             </div>
+        </Page>
     )
 }
 
