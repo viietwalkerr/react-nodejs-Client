@@ -7,6 +7,8 @@ import "./FormComponent.css";
 import NeonButton from '../Input/NeonButton/NeonButton';
 // import { NeonButton } from '../../components';
 
+
+
 const initialValuesLogin = {
     username: "",
     password: "",
@@ -41,16 +43,155 @@ const validationSchemaCreatePost = Yup.object().shape({
 const FormComponent = ({
     onSubmit,
     type,
-    title = type === "login" ? "Login" ? "register" : "Register" : "Create Post",
-    description = type === "login" ? "Please enter your login details" ? "register" : "Please enter your details" : "",
+    title = type === "login" ? "Login" : "register" ? "Register" : "Create Post",
+    description = type === "login" ? "Please enter your login details" : "register" ? "Please enter your details" : "",
 
 }) => {
+
+    const loginForm = () => {
+        return (
+            <>
+                <div className="textbox">
+                    <span className="icon">
+                        <FaIcons.FaUserAlt />
+                    </span>
+                    <Field
+                        autoComplete="off"
+                        className="inputField"
+                        name="username"
+                        placeholder="Username"
+                    />
+                </div>
+                <div className="textbox">
+                    <span className="icon">
+                        <FaIcons.FaLock />
+                    </span>
+                    <Field 
+                        autoComplete="off"
+                        className="inputField"
+                        name="password"
+                        placeholder="Password"
+                        type="password"
+                    />
+                </div>
+            </>
+        )
+    }
+
+    const registerForm = () => {
+        return (
+            <>
+                <div className="textbox">
+                    <ErrorMessage name="firstname" component="span" />
+                    <span className="icon">
+                        <FaIcons.FaUser />
+                    </span>
+                    <Field 
+                        autoComplete="off"
+                        // id="inputCreatePost"
+                        className="inputField" 
+                        name="firstname" 
+                        placeholder="First Name"
+                    />
+                </div>
+                <div className="textbox">
+                    <ErrorMessage name="lastname" component="span" />
+                    <span className="icon">
+                        <FaIcons.FaUserPlus />
+                    </span>
+                    <Field 
+                        autoComplete="off"
+                            // id="inputCreatePost"
+                        className="inputField" 
+                        name="lastname" 
+                        placeholder="Last Name"
+                    />
+                </div>
+                <div className="textbox">
+                    <ErrorMessage name="email" component="span" />
+                    <span className="icon">
+                        <AiIcons.AiFillMail />
+                    </span>
+                    <Field 
+                        autoComplete="off"
+                        // id="inputCreatePost"
+                        className="inputField" 
+                        name="email" 
+                        placeholder="Email Address"
+                    />
+                </div>
+                <div className="textbox">
+                    <ErrorMessage name="username" component="span" />
+                    <span className="icon">
+                        <FaIcons.FaUserTag />
+                    </span>
+                    <Field 
+                        autoComplete="off"
+                        // id="inputCreatePost"
+                        className="inputField" 
+                        name="username" 
+                        placeholder="Username"
+                    />
+                </div>
+                <div className="textbox">
+                    <ErrorMessage name="password" component="span" />
+                    <span className="icon">
+                        <FaIcons.FaLock />
+                    </span>
+                    <Field 
+                        autoComplete="off"
+                        type="password"
+                        // id="inputCreatePost"
+                        className="inputField" 
+                        name="password" 
+                        placeholder="Password"
+                    />
+                </div>
+            </>
+        )
+    };
+
+    const createPostForm = () => {
+        return (
+            <>
+                <div className='textbox'>
+                    <ErrorMessage name="post-" component="span" className="error"/>
+                    <span className='icon'>
+                        <FaIcons.FaInfo />
+                    </span>
+                    <Field 
+                        autoComplete="off"
+                        id=""
+                        className="inputField"
+                        name="title"
+                        placeholder="Title"
+                    />
+                </div>
+                <div className="textbox">
+                    <ErrorMessage name="post-" component="span" className="error"/>
+                        <br />
+                        <span className="icon">
+                            <FaIcons.FaRegEdit />
+                        </span>
+                        <Field 
+                            autoComplete="off"
+                            id=""
+                            className="inputField" 
+                            name="postText" 
+                            placeholder="Post"
+                        />
+                </div>
+            </>
+        )
+    }
+
+    console.log("TYPE: ", type);
     return (
         <div className="formBox">
             <Formik 
-                initialValues={type === "login" ? initialValuesLogin ? type === "register" : initialValuesRegister : initialValuesCreatePost}
+                initialValues={type === "login" ? initialValuesLogin : type === "register" ? initialValuesRegister : initialValuesCreatePost}
                 // onSubmit={loginSubmit}
-                validationSchema={type === "register" ? validationSchemaRegister ? type === "create post" : validationSchemaCreatePost : undefined}
+                validationSchema={type === "register" ? validationSchemaRegister : type === "create post" ? validationSchemaCreatePost : undefined}
                 onSubmit={onSubmit}
             >
                 <Form>
@@ -61,136 +202,10 @@ const FormComponent = ({
                         {/* <p>Please enter your login details</p> */}
                         <p>{description}</p>
                         
-                        {type === "login" ? (
-                            <>
-                                <div className="textbox">
-                                    <span className="icon">
-                                        <FaIcons.FaUserAlt />
-                                    </span>
-                                    <Field
-                                        autoComplete="off"
-                                        className="inputField"
-                                        name="username"
-                                        placeholder="Username"
-                                    />
-                                </div>
-                                <div className="textbox">
-                                    <span className="icon">
-                                        <FaIcons.FaLock />
-                                    </span>
-                                    <Field 
-                                        autoComplete="off"
-                                        className="inputField"
-                                        name="password"
-                                        placeholder="Password"
-                                        type="password"
-                                    />
-                                </div>
-                            </>
-                        )
-                        ? type === "register" : (
-                            <>
-                                <div className="textbox">
-                                    <ErrorMessage name="firstname" component="span" />
-                                    <span className="icon">
-                                        <FaIcons.FaUser />
-                                    </span>
-                                    <Field 
-                                        autoComplete="off"
-                                        // id="inputCreatePost"
-                                        className="inputField" 
-                                        name="firstname" 
-                                            placeholder="First Name"
-                                        />
-                                </div>
-                                <div className="textbox">
-                                    <ErrorMessage name="lastname" component="span" />
-                                    <span className="icon">
-                                        <FaIcons.FaUserPlus />
-                                    </span>
-                                    <Field 
-                                        autoComplete="off"
-                                            // id="inputCreatePost"
-                                        className="inputField" 
-                                        name="lastname" 
-                                        placeholder="Last Name"
-                                    />
-                                </div>
-                                <div className="textbox">
-                                    <ErrorMessage name="email" component="span" />
-                                    <span className="icon">
-                                        <AiIcons.AiFillMail />
-                                    </span>
-                                    <Field 
-                                        autoComplete="off"
-                                        // id="inputCreatePost"
-                                        className="inputField" 
-                                        name="email" 
-                                        placeholder="Email Address"
-                                    />
-                                </div>
-                                <div className="textbox">
-                                    <ErrorMessage name="username" component="span" />
-                                    <span className="icon">
-                                        <FaIcons.FaUserTag />
-                                    </span>
-                                    <Field 
-                                        autoComplete="off"
-                                        // id="inputCreatePost"
-                                        className="inputField" 
-                                        name="username" 
-                                        placeholder="Username"
-                                    />
-                                </div>
-                                <div className="textbox">
-                                    <ErrorMessage name="password" component="span" />
-                                    <span className="icon">
-                                        <FaIcons.FaLock />
-                                    </span>
-                                    <Field 
-                                        autoComplete="off"
-                                        type="password"
-                                        // id="inputCreatePost"
-                                        className="inputField" 
-                                        name="password" 
-                                        placeholder="Password"
-                                    />
-                                </div>
-                            </> 
-                        ) : (
-                            <>
-                                <div className='textbox'>
-                                <ErrorMessage name="post-" component="span" className="error"/>
-                                    <span className='icon'>
-                                        <FaIcons.FaInfo />
-                                    </span>
-                                    <Field 
-                                        autoComplete="off"
-                                        id=""
-                                        className="inputField"
-                                        name="title"
-                                        placeholder="Title"
-                                    />
-                                </div>
-                                <div className="textbox">
-                                    <ErrorMessage name="post-" component="span" className="error"/>
-                                        <br />
-                                        <span className="icon">
-                                            <FaIcons.FaRegEdit />
-                                        </span>
-                                        <Field 
-                                            autoComplete="off"
-                                            id=""
-                                            className="inputField" 
-                                            name="postText" 
-                                            placeholder="Post"
-                                        />
-                                </div>
-                            </>
-                            )
+                        {type === "login" ? ( loginForm() )
+                            : type === "register" ? ( registerForm() )
+                            : ( createPostForm() )
                         }
-
-
                             {/* <button type="submit" className="rainbowButton">
                                 <span>Submit</span>
                             </button> */}

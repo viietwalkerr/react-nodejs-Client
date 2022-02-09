@@ -3,8 +3,18 @@ import "./Comments.scss"
 import { AuthContext } from "../../helpers/AuthContext";
 import { NeonButton } from '..';
 import Page from '../Layout/Common/Page/Page';
+import { Comment } from '../../types/postsType';
 
-const Comments = ({
+
+interface CommentsProps {
+    commentsList?: Comment[];
+    newComment: string;
+    addComment: (comment: string) => void;
+    deleteComment: (id: string) => void;
+    onChange: (value: string) => void;
+}
+
+const Comments: React.FC<CommentsProps> = ({
     commentsList,
     newComment,
     addComment, 
@@ -32,11 +42,11 @@ const Comments = ({
                     />
                 </div>
                 {/* <button className="rainbowButton" onClick={addComment}><span>Add Comment </span></button> */}
-                <NeonButton title='Add Comment' onClick={addComment}/>
+                <NeonButton title='Add Comment' onClick={() => addComment(newComment)}/>
             </div>
         )
     }
-    const renderComment = (comment, key) => {
+    const renderComment = (comment: Comment, key: number) => {
         return (
             <div key={key} className="comment"> 
                 <div className='comment-text'>
@@ -49,7 +59,7 @@ const Comments = ({
                     {authState.username === comment.username && (
                     // <button className="rainbowButton" onClick={() => {deleteComment(comment.id)}}><span> Delete </span></button>
                     <div className='delete-button'>
-                        <NeonButton title='Delete' onClick={() => {deleteComment(comment.id)}}/>
+                        <NeonButton title='Delete' onClick={() => {deleteComment(comment.id.toString())}}/>
                     </div>
                     )}
                 </div>
@@ -61,7 +71,7 @@ const Comments = ({
         <div className='comments'>
             <h2>Comments</h2>
             <div className="listOfComments">
-                {commentsList.map((comment, key) => {
+                {commentsList?.map((comment, key) => {
                     return (
                         renderComment(comment, key)
                     );

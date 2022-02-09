@@ -1,6 +1,7 @@
 .App {
   width: 99vw;
-  height: auto;
+  height: 100vh;
+  /* height: auto; */
   display: flex;
   align-items: center;
   /* padding-top: 40px; */

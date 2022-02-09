@@ -1,9 +1,16 @@
-import React from 'react';
+// import React from 'react';
 import "./NeonButton.scss";
 
+interface NeonButtonProps {
+    type?: "button" | "submit";
+    title: string;
+    onClick: () => void;
+    id?: string | undefined;
+    className?: string;
+};
 
-const NeonButton = ({
-    type = "Submit",
+const NeonButton: React.FC<NeonButtonProps> = ({
+    type = "submit",
     title = "Button",
     onClick,
     id = "none",

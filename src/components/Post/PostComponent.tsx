@@ -1,11 +1,27 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import "./PostComponent.scss";
 import { AuthContext } from "../../helpers/AuthContext";
 import NeonButton from '../Input/NeonButton/NeonButton';
 import * as AiIcons from 'react-icons/ai';
+import { useDispatch, useSelector } from 'react-redux';
+import { ApplicationState } from '../../store';
+import { Likes, Post } from '../../types/postsType';
+import { bindActionCreators } from 'redux';
+import { actionCreators } from '../../store/Global';
 
-const PostComponent = ({
-    id ="",
+interface PostComponentProps {
+    id?: string;
+    onClickTitle: (() => void) | undefined;
+    onClickBody: (() => void) | undefined;
+    onClickDelete?: (() => void) | undefined;
+    onClickLike: (() => void) | any | undefined;
+    likedList?: Likes[];
+    post: Post,
+    key?: any,
+};
+
+const PostComponent: React.FC<PostComponentProps> = ({
+    id = "",
     onClickTitle,
     onClickBody,
     onClickDelete,
@@ -18,7 +34,22 @@ const PostComponent = ({
 }) => {
     const idModifier = id === "individual" ? "individual" : "";
 
-    const { authState } = useContext(AuthContext);
+    // const { authState } = useContext(AuthContext);
+    // const { fetchAllLikes } = bindActionCreators(actionCreators, useDispatch());
+
+    // const likedList = useSelector(
+    //     (state: ApplicationState) => state.global?.likedPosts
+    // );
+    // useEffect(() => {
+    //     // fetchAllLikes();
+    // }, [post.Likes.length]);
+
+    const userId = useSelector(
+        (state: ApplicationState) => state.auth?.id
+    );
+    // console.log(userId);
+    // console.log(likedList);
+
     return (
         <div key={key} className="post" id={`${idModifier}`}>
             <div className='title' onClick={onClickTitle}>
@@ -34,8 +65,9 @@ const PostComponent = ({
                 {/* {authState.username === post.username && (
                     <NeonButton title='Delete Post' onClick={onClickDelete}/>
                 )} */}
-                {!likedList.includes(post.id) ? (
-                    <div className='likeButtons'>
+               
+                {!likedList?.find(UserId => UserId.UserId === userId && post.id === UserId.PostId) ? (
+                     <div className='likeButtons'>
                         <AiIcons.AiOutlineLike className='likeIcon' onClick={onClickLike} />
                     </div>
                 ) : (

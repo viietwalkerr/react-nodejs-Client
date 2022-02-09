@@ -7,6 +7,11 @@ import { baseUrl } from '../../helpers/const';
 import * as FaIcons from 'react-icons/fa';
 import Cookies from 'js-cookie';
 import FormComponent from '../../components/Layout/FormComponent';
+import { bindActionCreators } from 'redux';
+import { actionCreators } from '../../store/Auth';
+import { useDispatch, useSelector } from 'react-redux';
+import { LoginData } from '../../types/userType';
+import { ApplicationState } from '../../store';
 
 function Login() {
 
@@ -18,6 +23,20 @@ function Login() {
 
     let history = useHistory();
 
+    const { loginUser } = bindActionCreators(actionCreators, useDispatch());
+
+    const isAuthenticated = useSelector(
+        (state: ApplicationState) => state.auth?.isAuthenticated
+    );
+
+    useEffect(() => {
+        if (isAuthenticated) {
+            const loginInitialisation = async () => {
+                history.push("/");
+            };
+            loginInitialisation();
+        }
+    }, [isAuthenticated]);
     // axios.defaults.withCredentials = true;
 
     // const initialValues = {
@@ -40,29 +59,30 @@ function Login() {
     // };
 
     // new stuff
-    const loginSubmit = (data) => {
+    const loginSubmit = (data: LoginData) => {
         console.log("TEST2: ", data);
         // axios.post(baseUrl + "auth/login", data, {crossDomain: true})
-        axios.post('http://localhost:3001/auth/login', data)
-        .then((response) => {
-            console.log(response.data)
-            if (response.data.error) {
-                alert(response.data.error);
-                console.log(response.data.error);
-                setLoginStatus(response.data.error);
-            } else {
-                console.log("Response from Login post");
-                console.log(response);
-                Cookies.set("access-token", response.data.accessToken);
-                setLoginStatus(response.data.user.username);
-                setAuthState({authState,  
-                    username: response.data.user.username, 
-                    id: response.data.user.id, 
-                    status: true 
-                });
-                history.push("/about");
-            }
-        });
+        // axios.post('http://localhost:3001/auth/login', data)
+        // .then((response) => {
+        //     console.log(response.data)
+        //     if (response.data.error) {
+        //         alert(response.data.error);
+        //         console.log(response.data.error);
+        //         setLoginStatus(response.data.error);
+        //     } else {
+        //         console.log("Response from Login post");
+        //         console.log(response);
+        //         Cookies.set("access-token", response.data.accessToken);
+        //         setLoginStatus(response.data.user.username);
+        //         setAuthState({authState,  
+        //             username: response.data.user.username, 
+        //             id: response.data.user.id, 
+        //             status: true 
+        //         });
+        //         history.push("/about");
+        //     }
+        // });
+        loginUser(data);
     };
     
     useEffect(() => {
@@ -74,28 +94,28 @@ function Login() {
         // }
     });
 
-    const login = () => {
-        const data = {username: username, password: password}; //creating an object
-        axios.post(baseUrl + "auth/login", data, {crossDomain: true}
-        )
-        .then((response) => {
-            console.log(response.data)
-            if (response.data.error){
-                alert(response.data.error);
-                console.log(response.data.error);
-            } else {
-                setLoginStatus(response.data.username)
-                // localStorage.setItem("accessToken", response.data.token);
-                Cookies.set(response.data.accessToken);
-                setAuthState({ 
-                    username: response.data.user.username, 
-                    id: response.data.user.id, 
-                    status: true 
-                });
-                history.push("/about");
-            }  
-        });
-    };
+    // const login = () => {
+    //     const data = {username: username, password: password}; //creating an object
+    //     axios.post(baseUrl + "auth/login", data, {crossDomain: true}
+    //     )
+    //     .then((response) => {
+    //         console.log(response.data)
+    //         if (response.data.error){
+    //             alert(response.data.error);
+    //             console.log(response.data.error);
+    //         } else {
+    //             setLoginStatus(response.data.username)
+    //             // localStorage.setItem("accessToken", response.data.token);
+    //             Cookies.set(response.data.accessToken);
+    //             setAuthState({ 
+    //                 username: response.data.user.username, 
+    //                 id: response.data.user.id, 
+    //                 status: true 
+    //             });
+    //             history.push("/about");
+    //         }  
+    //     });
+    // };
 
 
     return (
@@ -176,7 +196,7 @@ function Login() {
                            
                     {/* </div> */}
                     <FormComponent 
-                        onSubmit={(data) => loginSubmit(data)
+                        onSubmit={(data: LoginData) => loginSubmit(data)
                         }
                         type="login"
                     />

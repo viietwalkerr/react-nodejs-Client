@@ -7,12 +7,16 @@ import * as Yup from "yup";
 import * as FaIcons from 'react-icons/fa';
 import * as AiIcons from 'react-icons/ai';
 import FormComponent from '../../components/Layout/FormComponent';
-
+import { bindActionCreators } from 'redux';
+import { actionCreators } from '../../store/Auth';
+import { useDispatch } from 'react-redux';
+import { UserSignupData } from "../../types/userType";
 
 
 function Register() {
 
     // axios.defaults.withCredentials = true;
+    const { createUserAccount } = bindActionCreators(actionCreators, useDispatch());
 
     let history = useHistory();
     const initialValues = {
@@ -32,17 +36,18 @@ function Register() {
         password: Yup.string().min(4).max(20).required("You must input a password!"),
     });
 
-    const onSubmit = (data) => {
-        axios.post(baseUrl +"auth/register", data)
-        .then((response)=> {
-            if (response.data.error){
-                alert(response.data.error);
-                console.log(response.data.error);
-            } else {
-                console.log(response);
-                history.push("/success");
-            }
-        });
+    const onSubmit = (data: UserSignupData) => {
+        // axios.post(baseUrl +"auth/register", data)
+        // .then((response)=> {
+        //     if (response.data.error){
+        //         alert(response.data.error);
+        //         console.log(response.data.error);
+        //     } else {
+        //         console.log(response);
+        //         history.push("/success");
+        //     }
+        // });
+        createUserAccount(data);
     };
 
     return (
@@ -144,7 +149,7 @@ function Register() {
                     </Form>
                 </Formik> */}
                 <FormComponent 
-                    onSubmit={(data) => onSubmit(data)}
+                    onSubmit={(data: UserSignupData) => onSubmit(data)}
                     type="register"
                 />
             </main>
