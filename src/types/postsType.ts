@@ -43,3 +43,8 @@ export interface Comment {
     updatedAt: string;
     PostId: number;
 }
+
+export interface PostFormData {
+    title: string;
+    postText: string;
+}

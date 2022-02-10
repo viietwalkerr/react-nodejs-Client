@@ -32,7 +32,7 @@ function Login() {
     useEffect(() => {
         if (isAuthenticated) {
             const loginInitialisation = async () => {
-                history.push("/");
+                history.push("/home");
             };
             loginInitialisation();
         }

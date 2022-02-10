@@ -43,8 +43,8 @@ const validationSchemaCreatePost = Yup.object().shape({
 const FormComponent = ({
     onSubmit,
     type,
-    title = type === "login" ? "Login" : "register" ? "Register" : "Create Post",
-    description = type === "login" ? "Please enter your login details" : "register" ? "Please enter your details" : "",
+    title = type === "login" ? "Login" : type === "register" ? "Register" : "Create Post",
+    description = type === "login" ? "Please enter your login details" : type === "register" ? "Please enter your details" : "",
 
 }) => {
 
@@ -202,9 +202,9 @@ const FormComponent = ({
                         {/* <p>Please enter your login details</p> */}
                         <p>{description}</p>
                         
-                        {type === "login" ? ( loginForm() )
-                            : type === "register" ? ( registerForm() )
-                            : ( createPostForm() )
+                        {type === "login" ? loginForm()
+                            : type === "register" ? registerForm()
+                            : createPostForm()
                         }
                             {/* <button type="submit" className="rainbowButton">
                                 <span>Submit</span>

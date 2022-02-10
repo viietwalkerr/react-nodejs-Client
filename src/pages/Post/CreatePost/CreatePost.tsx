@@ -7,15 +7,34 @@ import * as Yup from 'yup';
 import * as FaIcons from 'react-icons/fa';
 import Cookies from 'js-cookie';
 import FormComponent from '../../../components/Layout/FormComponent';
+import { useDispatch, useSelector } from 'react-redux';
+import { ApplicationState } from '../../../store';
+import { PostFormData } from "../../../types/postsType";
+import { bindActionCreators } from 'redux';
+import { actionCreators } from '../../../store/Global';
+import Page from '../../../components/Layout/Common/Page/Page';
 
 
-function CreatePost() {
+interface CreatePostProps {
+
+}
+
+const CreatePost: React.FC<CreatePostProps> = ({}) => {
 
     let history = useHistory();
+    const isAuthenticated = useSelector(
+        (state: ApplicationState) => state.auth?.accessToken
+    );
+
+    const { createPost } = bindActionCreators(actionCreators, useDispatch());
+
+    
     const initialValues = {
         title: "",
         postText: "",
     };
+
+
 
     // Validate input
     // Requires login
@@ -23,32 +42,38 @@ function CreatePost() {
         // if (!localStorage.getItem("accessToken")) {
         //     history.push("/login");
         // }
-        if (!Cookies.get()) {
+        // if (!Cookies.get()) {
+        //     history.push("/");
+        // }
+        if (!isAuthenticated) {
             history.push("/");
         }
-    }, [history]); //need to put array or useEffect will continue infinitely
+    }, [isAuthenticated]); //need to put array or useEffect will continue infinitely
     const validationSchema = Yup.object().shape({
         title: Yup.string().required("You must input a Title!"),
         postText: Yup.string().required("You must input text for Post!"),
     });
 
-    const onSubmit = (data) => {
+    const onSubmit = (data: PostFormData) => {
         // Use headers to pass username
-        axios.post(
-            baseUrl + "posts", data, 
-            {
-                // headers: { accessToken: localStorage.getItem("accessToken") },
-                headers: { accessToken: Cookies.get("access-token") },
-            }
-        ).then((response) => {
-            history.push("/");
-        }, [history]);
+        // axios.post(
+        //     baseUrl + "posts", data, 
+        //     {
+        //         // headers: { accessToken: localStorage.getItem("accessToken") },
+        //         headers: { accessToken: Cookies.get("access-token") },
+        //     }
+        // ).then(() => {
+        //     history.push("/");
+        // }, []);
+        createPost(data);
+        history.push("/");
+        
+
     };
 
     return (
-        <div className="background">
-            <main>
-                
+        <Page>
+        <div className="createPost">
                 {/* <div className="createPostPage">
                     <Formik 
                         initialValues={initialValues} 
@@ -129,10 +154,10 @@ function CreatePost() {
                 </div> */}
                 <FormComponent 
                     type={"create post"}
-                    onSubmit={(value) => onSubmit(value)}
+                    onSubmit={(value: PostFormData) => onSubmit(value)}
                 />
-            </main>
-        </div>
+            </div>
+        </Page>
     )
 }
 

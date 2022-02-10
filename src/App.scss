@@ -1,0 +1,68 @@
+@import "./styling/globalVariables";
+
+.App {
+  width: 99vw;
+  // height: 100vh;
+  height: auto;
+  min-height: 100%;
+  // position: relative;
+  // display: flex;
+  // align-items: center;
+  /* padding-top: 40px; */
+  // flex-direction: column;
+
+  font-family: Helvetica;
+  text-align: center;
+  
+  
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Lato', sans-serif;
+}
+
+a:-webkit-any-link {
+  color: white;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background: url( ./assets/main2.jpg);
+}
+
+
+/* error span */
+span.error {
+  color: red;
+  margin-bottom: 40px;
+  padding-bottom: 40px;
+}
+
+.toastify {
+  border-radius: 20px;
+  background-color: $black-alt;
+  .toast {
+    background-color: $black-alt;
+    &-body {
+      background-color: $black-alt;
+      color: $white;
+    }
+    &-progress {
+      color: $white;
+    }
+    button {
+      color: $white;
+
+      svg {
+        color: $white;
+        fill: $white;
+      }
+    }
+  }
+}

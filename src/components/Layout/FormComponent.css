@@ -5,6 +5,8 @@
     width: 90vh;
     height: 50vh;
     margin: auto;
+    border-radius: 20px;
+    justify-items: center;
 }
   
 .formBox h2 {

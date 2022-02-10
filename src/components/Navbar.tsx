@@ -86,14 +86,14 @@ function Navbar() {
             if (!isAuthenticated) {
             return (
                 <>
-                    <NavLink activeClassName="topNavActive" to="/">Home</NavLink>
+                    <NavLink activeClassName="topNavActive" to="/home">Home</NavLink>
                     <NavLink activeClassName="topNavActive" to="/about">About</NavLink>
                 </>
             );
         } else {
             return (
                 <>
-                    <NavLink activeClassName="topNavActive" to="/">Home</NavLink>
+                    <NavLink activeClassName="topNavActive" to="/home">Home</NavLink>
                     <NavLink activeClassName="topNavActive" to="/about">About</NavLink>        
                     <NavLink activeClassName="topNavActive" to="/createpost">Create Post</NavLink>
                 </>

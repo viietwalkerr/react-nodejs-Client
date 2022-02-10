@@ -1,4 +1,4 @@
-import './App.css';
+import './App.scss';
 import { Router, Route, Switch } from 'react-router-dom';
 import React, { useState, useEffect, FC } from 'react';
 import { AuthContext } from './helpers/AuthContext';
@@ -126,7 +126,7 @@ const App = (
                   component={component}
                 />
               })} */}
-              <Route path="/" exact component={Home} />
+              <Route path="/home" exact component={Home} />
               <Route path="/createpost" exact component={CreatePost} />
               <Route path="/post/:id" exact component={Post} />
               <Route path="/login" component={Login} />
@@ -142,7 +142,13 @@ const App = (
             </Switch>
           
           <Footer />
-          <ToastContainer position="bottom-right"/>
+          <ToastContainer
+            className="toastify"
+            toastClassName="toast"
+            bodyClassName="toast-body"
+            progressClassName="toast-progress"
+            position="bottom-right"
+          />
         </AuthContext.Provider>
       </div>
     </Router>

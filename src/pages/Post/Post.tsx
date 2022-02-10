@@ -12,6 +12,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { ApplicationState } from '../../store';
 import { bindActionCreators } from 'redux';
 import { actionCreators } from '../../store/Global';
+import "./Post.scss";
 
 interface PostProps {
 

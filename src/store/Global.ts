@@ -1,7 +1,15 @@
 
 import { Action, Reducer } from "redux";
 import { AppThunkAction } from ".";
-import { Post, Likes, LikesObject, Comment } from "../types/postsType";
+import { Post, Likes, LikesObject, Comment, PostFormData } from "../types/postsType";
+import { 
+    EditPostTitleAction,
+    EditPostTextAction,
+    AddCommentAction,
+    DeleteCommentAction,
+    CreatePostAction,
+    LikePostAction,
+} from "./Posts";
 import { LogoutAction } from "./Auth";
 import axiosConfig from "../api/axiosConfig";
 import { toast } from "react-toastify";
@@ -26,10 +34,7 @@ export interface FetchAllLikesAction {
     payload: LikesObject[];
 }
 
-export interface LikePostAction {
-    type: "LIKE_POST";
-    payload: string;
-}
+
 
 export interface LikeResponseAction {
     type: "RECEIVE_LIKE_RESPONSE";
@@ -41,33 +46,18 @@ export interface FetchCommentsAction {
     payload: Comment[];
 }
 
-export interface EditPostTitleAction {
-    type: "EDIT_POST_TITLE";
-}
-
-export interface EditPostTextAction {
-    type: "EDIT_POST_TEXT";
-}
-
-export interface AddCommentAction {
-    type: "ADD_COMMENT";
-}
-
-export interface DeleteCommentAction {
-    type: "DELETE_COMMENT";
-}
-
 export type KnownAction = 
   | LogoutAction
   | FetchAllPostsAction
   | FetchAllLikesAction
   | FetchCommentsAction
-  | LikePostAction
   | LikeResponseAction
   | EditPostTitleAction
   | EditPostTextAction
   | AddCommentAction
-  | DeleteCommentAction;
+  | DeleteCommentAction
+  | CreatePostAction
+  | LikePostAction;
 
 
 export const actionCreators = {
@@ -234,6 +224,22 @@ export const actionCreators = {
             );
             if (res?.status === 200) {
                 toast.success("Successfully deleted a Comment");
+            }
+        }
+    },
+    createPost:
+    (data: PostFormData): AppThunkAction<KnownAction> => 
+    async(dispatch, getState) => {
+        const appState = getState();
+        if (appState && appState.auth?.accessToken) {
+            try {
+                const res = await axiosConfig.post(`${API}/posts`, data);
+                if (res?.status === 200) {
+                    toast.success("Successfully created post");
+                }
+            } catch (e) {
+                console.error(e);
+                toast.error("Error creating post");
             }
         }
     },

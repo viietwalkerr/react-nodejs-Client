@@ -1,16 +1,16 @@
 @import "../../../../styling/globalVariables";
 
 .footer {
-    position: relative;
+    position: absolute;
     width: 100%;
     // height: 400px;
     padding: 50px 100px;
     background: #111;
-    display: flex;
+    // display: flex;
     justify-content: space-between;
-    flex-wrap: wrap;
+    // flex-wrap: wrap;
     color: $white;
-    bottom: 1px;
+    // bottom: 1px;
 
     p {
         color: $grey-dark;
@@ -42,14 +42,19 @@
         }
 
         &__about-us {
-            width: 40%;
+            width: 30%;
 
+            p {
+                padding: 5px;
+            }
             .social {
                 margin-top: 140px;
                 display: flex;
                 
+                
                 li {
                     list-style: none;
+                    padding: 5px;
 
                     a {
                         display: inline-block;
@@ -72,13 +77,15 @@
         }
         &__quick-links {
             position: relative;
-            width: 25%;
+            width: 30%;
 
             ul {
                 li {
                     list-style: none;
+                    padding: 5px;
 
                     a {
+                        padding: 20px;
                         color: #999;
                         text-decoration: none;
                         margin-bottom: 10px;
@@ -92,7 +99,8 @@
             }
         }
         &__contact {
-            width: calc(35% - 60px);
+            // width: calc(35% - 60px);
+            width: 30%;
             margin-right: 0 !important;
 
             .info {
@@ -100,7 +108,7 @@
 
                 li {
                     display: flex;
-                    margin-bottom: 16px;
+                    padding: 5px;
 
                     a {
                         color: #999;
