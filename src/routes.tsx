@@ -1,4 +1,4 @@
-import Navbar from './components/Navbar';
+import Navbar from './components/NavBar/Navbar';
 import Home from './pages/Home/Home';
 import CreatePost from './pages/Post/CreatePost/CreatePost';
 import Post from './pages/Post/Post';

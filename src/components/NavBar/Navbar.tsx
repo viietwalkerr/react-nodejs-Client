@@ -6,19 +6,19 @@ import { Link, NavLink } from 'react-router-dom';
 // import { SidebarData} from './SidebarData';
 import './Navbar.scss';
 // import { IconContext } from 'react-icons';
-import { AuthContext } from '../helpers/AuthContext';
+import { AuthContext } from '../../helpers/AuthContext';
 import axios from 'axios';
-import { baseUrl } from '../helpers/const';
+import { baseUrl } from '../../helpers/const';
 import Cookies from 'js-cookie';
-import Sidebar from "./Sidebar";
+import Sidebar from "../Sidebar/Sidebar";
 import { useDispatch, useSelector } from 'react-redux';
-import { ApplicationState } from '../store';
+import { ApplicationState } from '../../store';
 import { bindActionCreators } from 'redux';
-import { actionCreators } from '../store/Auth';
+import { actionCreators } from '../../store/Auth';
 
 
 
-function Navbar() {
+const Navbar: React.FC = ({}) => {
     const [sidebar, setSidebar] = useState(false);
     const { authState } = useContext(AuthContext); 
     const { setAuthState} = useContext(AuthContext);

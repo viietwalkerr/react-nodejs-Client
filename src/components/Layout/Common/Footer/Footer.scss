@@ -4,19 +4,21 @@
     position: absolute;
     width: 100%;
     // height: 400px;
-    padding: 50px 100px;
+    padding: $padding-medium;
     background: #111;
     // display: flex;
     justify-content: space-between;
     // flex-wrap: wrap;
     color: $white;
-    // bottom: 1px;
+    margin-bottom: 1px;
 
     p {
         color: $grey-dark;
     }
 
     &-container {
+        padding: $padding-medium;
+        margin-top: $margin-top;
         display: flex;
         justify-content: space-between;
         flex-wrap: wrap;
@@ -42,6 +44,7 @@
         }
 
         &__about-us {
+            margin-left: $margin-small;
             width: 30%;
 
             p {

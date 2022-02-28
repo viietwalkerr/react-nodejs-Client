@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import * as FaIcons from 'react-icons/fa';
 import * as AiIcons from 'react-icons/ai';
 import { BrowserRouter as Link, NavLink } from 'react-router-dom';
-import { SidebarData} from './SidebarData';
+import { SidebarData} from './Sidebar/SidebarData';
 import './Navbar.css';
 // import { IconContext } from 'react-icons';
 

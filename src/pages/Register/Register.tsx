@@ -11,9 +11,13 @@ import { bindActionCreators } from 'redux';
 import { actionCreators } from '../../store/Auth';
 import { useDispatch } from 'react-redux';
 import { UserSignupData } from "../../types/userType";
+import Page from '../../components/Layout/Common/Page/Page';
+import "./Register.scss";
 
+const Register: React.FC = ({ 
 
-function Register() {
+    
+}) => {
 
     // axios.defaults.withCredentials = true;
     const { createUserAccount } = bindActionCreators(actionCreators, useDispatch());
@@ -37,124 +41,20 @@ function Register() {
     });
 
     const onSubmit = (data: UserSignupData) => {
-        // axios.post(baseUrl +"auth/register", data)
-        // .then((response)=> {
-        //     if (response.data.error){
-        //         alert(response.data.error);
-        //         console.log(response.data.error);
-        //     } else {
-        //         console.log(response);
-        //         history.push("/success");
-        //     }
-        // });
         createUserAccount(data);
+        history.push("/login");
     };
 
     return (
-        <div className="background">
-            <main>
-                {/* <Formik 
-                    initialValues={initialValues}
-                    onSubmit={onSubmit}
-                    validationSchema={validationSchema}
-                >
-                    <Form netlify>
-                        <div className="formBox">
-                            <h2>Register</h2>
-                            <p>Please enter your details</p>
-                                <div className="textbox">
-                                    <ErrorMessage name="firstname" component="span" />
-                                    <span className="icon">
-                                        <FaIcons.FaUser />
-                                    </span>
-                                    <Field 
-                                        autoComplete="off"
-                                        // id="inputCreatePost"
-                                        className="inputField" 
-                                        name="firstname" 
-                                        placeholder="First Name"
-                                    />
-                                </div>
-                                <div className="textbox">
-                                    <ErrorMessage name="lastname" component="span" />
-                                    <span className="icon">
-                                        <FaIcons.FaUserPlus />
-                                    </span>
-                                    <Field 
-                                        autoComplete="off"
-                                        // id="inputCreatePost"
-                                        className="inputField" 
-                                        name="lastname" 
-                                        placeholder="Last Name"
-                                    />
-                                </div>
-                                <div className="textbox">
-                                    <ErrorMessage name="email" component="span" />
-                                    <span className="icon">
-                                        <AiIcons.AiFillMail />
-                                    </span>
-                                    <Field 
-                                        autoComplete="off"
-                                        // id="inputCreatePost"
-                                        className="inputField" 
-                                        name="email" 
-                                        placeholder="Email Address"
-                                    />
-                                </div>
-                                <div className="textbox">
-                                    <ErrorMessage name="username" component="span" />
-                                    <span className="icon">
-                                        <FaIcons.FaUserTag />
-                                    </span>
-                                    <Field 
-                                        autoComplete="off"
-                                        // id="inputCreatePost"
-                                        className="inputField" 
-                                        name="username" 
-                                        placeholder="Username"
-                                    />
-                                </div>
-                                <div className="textbox">
-                                    <ErrorMessage name="password" component="span" />
-                                    <span className="icon">
-                                        <FaIcons.FaLock />
-                                    </span>
-                                    <Field 
-                                        autoComplete="off"
-                                        type="password"
-                                        // id="inputCreatePost"
-                                        className="inputField" 
-                                        name="password" 
-                                        placeholder="Password"
-                                    />
-                                </div> */}
-                                    {/* <div className="textbox">
-                                    <ErrorMessage name="confirmPassword" component="span" />
-                                        <span className="icon">
-                                            <FaIcons.FaLock />
-                                        </span>    
-                                    <Field 
-                                            autocomplete="off"
-                                            type="password"
-                                            id="inputCreatePost"
-                                            className="inputField" 
-                                            name="confirmPassword" 
-                                            placeholder="Confirm Password"
-                                        />
-                                    </div> */}
-                            {/* <button type="submit" className="rainbowButton">
-                                <span>Register</span>
-                            </button>
-                        </div>
-                    </Form>
-                </Formik> */}
+        <div className="Register">
+            <Page>
                 <FormComponent 
                     onSubmit={(data: UserSignupData) => onSubmit(data)}
                     type="register"
                 />
-            </main>
+            </Page>
         </div> 
     )
-}
+};
 
-export default Register
+export default Register;

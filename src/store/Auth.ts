@@ -4,6 +4,8 @@ import { UserSignupData } from "../types/userType";
 import axiosConfig from "../api/axiosConfig";
 import Post from "../pages/Post/Post";
 import axios, { AxiosResponse } from "axios";
+import { toast } from "react-toastify";
+import { error } from "console";
 
 const API = process.env.REACT_APP_BACKEND_API;
 
@@ -25,7 +27,12 @@ export interface TokenResponse {
         email: string,
         username: string,
         id: number,
-    }
+    },
+    error: string,
+}
+
+export interface TokenError {
+    error: string
 }
 
 export interface LogoutAction {
@@ -49,7 +56,7 @@ export interface LoginAction {
             email: string,
             username: string,
             id: number,
-        }
+        },
     };
 }
 
@@ -78,16 +85,18 @@ export const actionCreators = {
                     type: "CREATE_USER_ACCOUNT",
                     payload: { created: true },
                 });
+                toast.success("Registration Successful!");
             } else if (response.data === false) {
                 dispatch({
                     type: "CREATE_USER_ACCOUNT",
                     payload: { created: false },
                 });
-                console.log("NO");
+                toast.error("There was an error creating your account");
                 return false;
             }
         } catch (e) {
             console.error(e);
+            toast.error("An error occured");
         }
     },
     loginUser:
@@ -103,7 +112,7 @@ export const actionCreators = {
             );
             console.log("TEST");
             // Successful backend response
-            if (response.status === 200) {
+            if (response?.status === 200) {
                 console.log("DATA: ", response.data);
                 const { accessToken, user } = response.data;
                 dispatch({
@@ -111,10 +120,16 @@ export const actionCreators = {
                     payload: { accessToken, user },
                 });
             } else {
-                throw new Error("Login failed. Please try again.");
+                if (response?.data.error){
+                    console.log("yes");
+                }
+                toast.error("Login failed. Please check your details and try again");
+                // toast.error(`${response}`);
+                    // throw new Error("Login failed. Please try again.");
             }
         } catch (e) {
             console.error(e);
+            toast.error(`${e}`);
         }
     },
     logoutUser:

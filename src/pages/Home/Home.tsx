@@ -19,7 +19,7 @@ import { actionCreators } from '../../store/Global';
 import { Post } from "../../types/postsType";
 
 
-function Home() {
+const Home: React.FC = ({}) => {
 
     // axios.defaults.withCredentials = true;
 

@@ -3,7 +3,7 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as FaIcons from 'react-icons/fa';
 import * as AiIcons from 'react-icons/ai';
 import * as Yup from "yup";
-import "./FormComponent.css";
+import "./FormComponent.scss";
 import NeonButton from '../Input/NeonButton/NeonButton';
 // import { NeonButton } from '../../components';
 
