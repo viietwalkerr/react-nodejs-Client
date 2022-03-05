@@ -29,6 +29,12 @@ import usePopulateInitialData from './hooks/usePopulateInitialData';
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+import { io } from "socket.io-client";
+import Chat from './components/Layout/Common/Chat/Chat';
+
+const API = process.env.REACT_APP_BACKEND_API;
+
+const socket = io(`${API}`);
 // axios.defaults.withCredentials = true;
 
 // function scrollFunction()
@@ -63,6 +69,17 @@ const App = (
   const accessToken = useSelector(
     (state: ApplicationState) => state.auth?.accessToken
   );
+
+  const [username, setUsername] = useState("");
+  const [room, setRoom] = useState("");
+
+  const [chatVisible, setChatVisible] = useState(false);
+
+  const joinRoom = () => {
+    if (username !== "" && room !== "") {
+      socket.emit("join_room", room)
+    }
+  };
   // useEffect(() => {
   //   console.log("cookie check");
   //   console.log(Cookies.get("access-token"));
@@ -140,7 +157,10 @@ const App = (
               <Route path="/about" component={About} />
               <Route path="*" exact component={NotFound} />
             </Switch>
-          
+          <Chat
+            socket={socket}
+            visible={(variable: any) => setChatVisible(variable)}
+          />
           <Footer />
           <ToastContainer
             className="toastify"
