@@ -1,9 +1,10 @@
 import React, { useContext } from 'react';
 import "./Comments.scss"
-import { AuthContext } from "../../helpers/AuthContext";
-import { NeonButton } from '..';
+import NeonButton from '../Input/NeonButton/NeonButton';
 import Page from '../Layout/Common/Page/Page';
 import { Comment } from '../../types/postsType';
+import { useSelector } from 'react-redux';
+import { ApplicationState } from '../../store';
 
 
 interface CommentsProps {
@@ -23,7 +24,7 @@ const Comments: React.FC<CommentsProps> = ({
 
 }) => {
 
-    const { authState } = useContext(AuthContext);
+    const user = useSelector((state: ApplicationState) => state.user);
 
     const renderAddComment = () => {
         return (
@@ -56,7 +57,7 @@ const Comments: React.FC<CommentsProps> = ({
                     <div className='username'>
                         <label> By User: {comment.username}</label>
                     </div>
-                    {authState.username === comment.username && (
+                    {user?.userName === comment.username && (
                     // <button className="rainbowButton" onClick={() => {deleteComment(comment.id)}}><span> Delete </span></button>
                     <div className='delete-button'>
                         <NeonButton title='Delete' onClick={() => {deleteComment(comment.id.toString())}}/>

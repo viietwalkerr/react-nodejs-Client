@@ -1,6 +1,6 @@
 import React from 'react'
 
-function Success() {
+const Success: React.FC = () => {
     return (
         <div className="background">
             <main>

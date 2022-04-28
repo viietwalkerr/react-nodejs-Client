@@ -29,3 +29,9 @@ export interface LoginData {
     username: string;
     password: string;
 }
+
+export interface ChangePasswordData {
+    oldPassword: string;
+    newPassword: string;
+    confirmNewPassword: string;
+}

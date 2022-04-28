@@ -1,9 +1,19 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 import "./ProfileCard.scss";
 import profiledefault from '../../../uploads/profiledefault.jpg';
 import * as AiIcons from 'react-icons/ai';
 
-const ProfileCard = ({ user, userPostsNumber, children }) => {
+interface ProfileCardProps {
+    user?: any;
+    userPostsNumber: number | undefined;
+    children: ReactElement;
+}
+
+const ProfileCard: React.FC<ProfileCardProps> = ({ 
+    user,
+    userPostsNumber,
+    children
+}) => {
     return (
         <>
             <div className="profile-card">

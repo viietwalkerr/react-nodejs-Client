@@ -1,7 +1,6 @@
 import React from 'react'
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import { baseUrl } from '../../helpers/const';
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import * as Yup from "yup";
 import * as FaIcons from 'react-icons/fa';
@@ -22,7 +21,7 @@ const Register: React.FC = ({
     // axios.defaults.withCredentials = true;
     const { createUserAccount } = bindActionCreators(actionCreators, useDispatch());
 
-    let history = useHistory();
+    let navigate = useNavigate();
     const initialValues = {
         firstname: "",
         lastname: "",
@@ -42,7 +41,7 @@ const Register: React.FC = ({
 
     const onSubmit = (data: UserSignupData) => {
         createUserAccount(data);
-        history.push("/login");
+        navigate("/login");
     };
 
     return (
@@ -50,7 +49,7 @@ const Register: React.FC = ({
             <Page>
                 <FormComponent 
                     onSubmit={(data: UserSignupData) => onSubmit(data)}
-                    type="register"
+                    type="Register"
                 />
             </Page>
         </div> 
