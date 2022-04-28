@@ -4,7 +4,7 @@ import "./NeonButton.scss";
 interface NeonButtonProps {
     type?: "button" | "submit";
     title: string;
-    onClick: () => void;
+    onClick?: () => void;
     id?: string | undefined;
     className?: string;
 };

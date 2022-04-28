@@ -1,7 +1,7 @@
 import React from 'react'
-import Page from '../components/Layout/Common/Page/Page'
+import Page from '../../components/Layout/Common/Page/Page'
 
-function NotFound() {
+const NotFound: React.FC = () => {
     return (
         <Page>
             <div className="content">

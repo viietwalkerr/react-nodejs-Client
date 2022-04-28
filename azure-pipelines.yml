@@ -1,0 +1,57 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+  - main
+  
+# pool:
+  # vmImage: ubuntu-latest
+  
+pool: Azure Pipelines
+
+steps:
+- task: NodeTool@0
+  inputs:
+    versionSpec: '16.x'
+  displayName: 'Install Node.js'
+
+- script: |
+    npm install
+  workingDirectory: '' 
+  displayName: 'npm install'
+  
+- script: |
+    npm run build:local
+  workingDirectory: ''
+  displayName: 'npm run build:local'
+
+- task: PublishPipelineArtifact@1
+  inputs:
+    targetPath: 'build'
+    artifact: 'illumin8deploy'
+    publishLocation: 'pipeline'
+    
+# - task: AzureWebApp@1
+#   inputs:
+#     azureSubscription: 'Azure subscription 1(c7c50744-f425-490a-b247-f61e349e9596)'
+#     appType: 'webAppLinux'
+#     appName: 'illumin8'
+#     deployToSlotOrASE: true
+#     resourceGroupName: 'illumin8'
+#     slotName: 'production'
+#     package: '$(System.DefaultWorkingDirectory)/build'
+#     runtimeStack: 'NODE|16-lts'
+
+- task: AzureRmWebAppDeployment@4
+  inputs:
+    ConnectionType: 'AzureRM'
+    azureSubscription: 'Azure subscription 1(c7c50744-f425-490a-b247-f61e349e9596)'
+    appType: 'webAppLinux'
+    WebAppName: 'illumin8'
+    deployToSlotOrASE: true
+    ResourceGroupName: 'illumin8'
+    SlotName: 'production'
+    packageForLinux: '$(System.DefaultWorkingDirectory)/build'
+    RuntimeStack: 'NODE|16-lts'

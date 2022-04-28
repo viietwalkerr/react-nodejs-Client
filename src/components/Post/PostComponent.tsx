@@ -1,6 +1,5 @@
 import React, { useContext, useEffect } from 'react';
 import "./PostComponent.scss";
-import { AuthContext } from "../../helpers/AuthContext";
 import NeonButton from '../Input/NeonButton/NeonButton';
 import * as AiIcons from 'react-icons/ai';
 import { useDispatch, useSelector } from 'react-redux';
@@ -17,7 +16,7 @@ interface PostComponentProps {
     onClickLike: (() => void) | any | undefined;
     likedList?: Likes[];
     post: Post,
-    key?: any,
+    index?: number,
 };
 
 const PostComponent: React.FC<PostComponentProps> = ({
@@ -28,13 +27,12 @@ const PostComponent: React.FC<PostComponentProps> = ({
     onClickLike,
     likedList,
     post,
-    key,
+    index,
 
 
 }) => {
     const idModifier = id === "individual" ? "individual" : "";
 
-    // const { authState } = useContext(AuthContext);
     // const { fetchAllLikes } = bindActionCreators(actionCreators, useDispatch());
 
     // const likedList = useSelector(
@@ -51,7 +49,7 @@ const PostComponent: React.FC<PostComponentProps> = ({
     // console.log(likedList);
 
     return (
-        <div key={key} className="post" id={`${idModifier}`}>
+        <div key={index} className="post" id={`${idModifier}`}>
             <div className='title' onClick={onClickTitle}>
                 {post.title}
             </div>

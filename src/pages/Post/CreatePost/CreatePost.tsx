@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
-import { useHistory } from 'react-router-dom';
-import { baseUrl } from '../../../helpers/const';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import * as Yup from 'yup';
 import * as FaIcons from 'react-icons/fa';
@@ -21,7 +20,7 @@ interface CreatePostProps {
 
 const CreatePost: React.FC<CreatePostProps> = ({}) => {
 
-    let history = useHistory();
+    let navigate = useNavigate();
     const isAuthenticated = useSelector(
         (state: ApplicationState) => state.auth?.accessToken
     );
@@ -46,7 +45,7 @@ const CreatePost: React.FC<CreatePostProps> = ({}) => {
         //     history.push("/");
         // }
         if (!isAuthenticated) {
-            history.push("/");
+            navigate("/");
         }
     }, [isAuthenticated]); //need to put array or useEffect will continue infinitely
     const validationSchema = Yup.object().shape({
@@ -66,7 +65,7 @@ const CreatePost: React.FC<CreatePostProps> = ({}) => {
         //     history.push("/");
         // }, []);
         createPost(data);
-        history.push("/");
+        navigate("/");
         
 
     };
@@ -153,7 +152,7 @@ const CreatePost: React.FC<CreatePostProps> = ({}) => {
                     </Formik>
                 </div> */}
                 <FormComponent 
-                    type={"create post"}
+                    type={"Create Post"}
                     onSubmit={(value: PostFormData) => onSubmit(value)}
                 />
             </div>
