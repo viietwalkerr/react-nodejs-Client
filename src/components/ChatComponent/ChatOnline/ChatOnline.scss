@@ -1,0 +1,36 @@
+@import "../../../styling/globalVariables";
+
+.chat-online {
+
+    &__friend {
+        display: flex;
+        align-items: center;
+        font-weight: 500;
+        cursor: pointer;
+        margin-top: 10px;
+    }
+
+    &__image-container {
+        position: relative;
+        margin-right: 10px;
+    }
+
+    &__img {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 1px solid $white;
+        
+    }
+
+    &__badge {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background-color: $green;
+        position: absolute;
+        top: 2px;
+        right: 2px;
+    }
+}

@@ -1,4 +1,5 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 import "./Footer.scss";
 
 const Footer = ({}) => {
@@ -18,7 +19,7 @@ const Footer = ({}) => {
                 <div className='footer-container__quick-links'>
                     <h2>Quick Links</h2>
                     <ul>
-                        <li>About</li>
+                        <li><NavLink to="/about">About</NavLink></li>
                         <li>FAQ</li>
                         <li>Privacy Policy</li>
                         <li>Help</li>
@@ -31,14 +32,14 @@ const Footer = ({}) => {
                     <ul className='info'>
                         <li className='info__address'>
                             <span><i className=''></i></span>
-                            <span>369 Australia Street
-                                Australia
+                            <span>369 Australia Street,
+                                Australia,
                                 AUS
                             </span>
                         </li>
                         <li className='info__phone'>
                             <span><i className=''></i></span>
-                            <p>+61 0400123456
+                            <p>
                                 +61 0400123456
                             </p>
                         </li>

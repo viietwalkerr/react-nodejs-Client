@@ -3,14 +3,14 @@ import Home from './pages/Home/Home';
 import CreatePost from './pages/Post/CreatePost/CreatePost';
 import Post from './pages/Post/Post';
 import Login from './pages/Login/Login';
-import Logout from './pages/Logout';
+import Logout from './pages/Logout/Logout';
 import Register from './pages/Register/Register';
-import Success from './pages/Success';
+import Success from './pages/Success/Success';
 import Profile from './pages/Profile/Profile';
 import About from './pages/About/About';
 import Settings from './pages/Settings/Settings';
-import ChangePassword from './pages/ChangePassword';
-import NotFound from './pages/NotFound';
+import ChangePassword from './pages/ChangePassword/ChangePassword';
+import NotFound from './pages/NotFound/NotFound';
 
 
 export const routes = [

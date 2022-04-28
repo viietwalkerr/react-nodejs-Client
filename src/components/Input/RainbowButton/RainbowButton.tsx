@@ -1,8 +1,13 @@
 import React from 'react';
 import "./RainbowButton.css";
 
-const RainbowButton = ({
-    type = "Submit",
+interface RainbowButtonProps {
+    type?: "button" | "submit";
+    title: string;
+}
+
+const RainbowButton: React.FC<RainbowButtonProps> = ({
+    type = "submit",
     title = "Button",
 
 }) => {

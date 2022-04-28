@@ -27,6 +27,17 @@ const initialValuesCreatePost = {
     postText: "",
 }
 
+const initialValuesChangePassword = {
+    oldPassword: "",
+    newPassword: "",
+    confirmNewPassword: "",
+}
+
+const validationSchemaLogin = Yup.object().shape({
+    username: Yup.string().required("Please enter a username"),
+    password: Yup.string().required('Please enter a password'),
+})
+
 const validationSchemaRegister = Yup.object().shape({
     firstname: Yup.string(),
     lastname: Yup.string(),
@@ -40,11 +51,26 @@ const validationSchemaCreatePost = Yup.object().shape({
     postText: Yup.string().required("You must input text for Post!"),
 });
 
-const FormComponent = ({
+const validationSchemaChangePassword = Yup.object().shape({
+    oldPassword: Yup.string().required('Required'),
+    newPassword: Yup.string().required('Required'),
+    confirmNewPassword: Yup.string().oneOf([Yup.ref('newPassword'), null], "Password does not match!").required('Required'),
+})
+
+interface FormComponentProps {
+    onSubmit?: any;
+    type?: "Login" | "Register" | "Create Post" | "Change Password";
+    title?: string;
+    description?: string;
+}
+
+const FormComponent: React.FC<FormComponentProps> = ({
     onSubmit,
     type,
-    title = type === "login" ? "Login" : type === "register" ? "Register" : "Create Post",
-    description = type === "login" ? "Please enter your login details" : type === "register" ? "Please enter your details" : "",
+    title = type,
+    description = type === "Login" ? "Please enter your login details" 
+        : type === "Register" ? "Please enter your details" 
+        : "",
 
 }) => {
 
@@ -185,35 +211,85 @@ const FormComponent = ({
         )
     }
 
+    const changePasswordForm = () => {
+        return (
+            <>
+                <div className='textbox'>
+                    <ErrorMessage name="post-" component="span" className="error"/>
+                    <span className='icon'>
+                        <FaIcons.FaLock />
+                    </span>
+                    <Field 
+                        autoComplete="off"
+                        id=""
+                        className="inputField"
+                        name="oldPassword"
+                        placeholder="Old Password"
+                    />
+                </div>
+                <div className="textbox">
+                    <ErrorMessage name="post-" component="span" className="error"/>
+                    <br />
+                    <span className="icon">
+                        <FaIcons.FaUserLock />
+                    </span>
+                    <Field 
+                        autoComplete="off"
+                        id=""
+                        className="inputField" 
+                        name="newPassword" 
+                        placeholder="New Password"
+                    />
+                </div>
+                <div className="textbox">
+                    <ErrorMessage name="post-" component="span" className="error"/>
+                    <br />
+                    <span className="icon">
+                        <FaIcons.FaUserLock />
+                    </span>
+                    <Field 
+                        autoComplete="off"
+                        id=""
+                        className="inputField" 
+                        name="confirmNewPassword" 
+                        placeholder="Confirm New Password"
+                    />
+                </div>
+            </>
+        )
+    }
+
     console.log("TYPE: ", type);
     return (
         <div className="formBox">
             <Formik 
-                initialValues={type === "login" ? initialValuesLogin : type === "register" ? initialValuesRegister : initialValuesCreatePost}
+                initialValues={
+                    type === "Login" ? initialValuesLogin
+                        : type === "Register" ? initialValuesRegister
+                        : type === "Create Post" ? initialValuesCreatePost
+                        : initialValuesChangePassword
+                }
                 // onSubmit={loginSubmit}
-                validationSchema={type === "register" ? validationSchemaRegister : type === "create post" ? validationSchemaCreatePost : undefined}
+                validationSchema={
+                    type === "Register" ? validationSchemaRegister
+                        : type === "Create Post" ? validationSchemaCreatePost
+                        : type === "Login" ? validationSchemaLogin
+                        : validationSchemaChangePassword
+                    }
                 onSubmit={onSubmit}
             >
                 <Form>
-                    {/* <div className="formBox"> */}
-                        {/* <h2>Login Formik</h2> */}
-                        {/* <h2>Login</h2> */}
-                        <h2>{title}</h2>
-                        {/* <p>Please enter your login details</p> */}
-                        <p>{description}</p>
-                        
-                        {type === "login" ? loginForm()
-                            : type === "register" ? registerForm()
-                            : createPostForm()
-                        }
-                            {/* <button type="submit" className="rainbowButton">
-                                <span>Submit</span>
-                            </button> */}
-                            <NeonButton 
-                                type='submit'
-                                title={type === "create post" ? "Create Post" : "Submit"}
-                            />
-                    {/* </div> */}
+                    <h2>{title}</h2>
+                    <p>{description}</p>
+                    {type === "Login" ? loginForm()
+                        : type === "Register" ? registerForm()
+                        : type === "Create Post" ? createPostForm()
+                        : changePasswordForm()
+                    }
+                    <NeonButton 
+                        type='submit'
+                        title={type === "Create Post" ? "Create Post" : "Submit"}
+                    />
                 </Form>
             </Formik>
         </div>

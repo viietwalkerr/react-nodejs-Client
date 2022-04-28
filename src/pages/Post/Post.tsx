@@ -1,7 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { baseUrl } from '../../helpers/const';
-import { AuthContext } from "../../helpers/AuthContext";
 import axios from 'axios';
 import * as AiIcons from 'react-icons/ai';
 import Cookies from 'js-cookie';
@@ -23,7 +21,6 @@ const Post: React.FC<PostProps> = ({
 
 }) => {
     let { id } = useParams<{id: string}>();
-    // const { authState } = useContext(AuthContext);
     // const [postObject, setPostObject] = useState([]);
     // const [likedPosts, setLikedPosts] = useState([]);
     // const [comments, setComments] = useState([]);
@@ -35,7 +32,7 @@ const Post: React.FC<PostProps> = ({
     // );
 
     const postObject = useSelector(
-        (state: ApplicationState) => state.global?.listOfPosts[parseInt(id)-1]
+        (state: ApplicationState) => state.global?.listOfPosts[parseInt(id!)-1]
     );
     console.log(postObject);
 
@@ -132,7 +129,7 @@ const Post: React.FC<PostProps> = ({
         //         setLikedPosts([...likedPosts, postId]);
         //     }
         // });
-        likePost(parseInt(id))
+        likePost(parseInt(id!))
         // fetchAllPosts();
     };
         
@@ -157,7 +154,7 @@ const Post: React.FC<PostProps> = ({
         //     }
         // });
         addComment(comment, 1);
-        fetchComments(id);
+        fetchComments(id!);
     };
 
     const deleteCommentFunction = (id: string) => {
@@ -303,8 +300,8 @@ const Post: React.FC<PostProps> = ({
                     {postObject ? <>
                         <PostComponent 
                             id="individual"
-                            onClickTitle={username === postObject?.username ? () => editPostTitleFunction(id) : undefined}
-                            onClickBody={username === postObject?.username ? () => editPostBodyFunction(id) : undefined}
+                            onClickTitle={username === postObject?.username ? () => editPostTitleFunction(id!) : undefined}
+                            onClickBody={username === postObject?.username ? () => editPostBodyFunction(id!) : undefined}
                             onClickLike={likePostFunction}
                             // onClickLike={undefined}
                             post={postObject}

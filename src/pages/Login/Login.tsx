@@ -1,9 +1,7 @@
 import React, { useState, useContext, useEffect } from 'react';
 import axios from 'axios';
 import { Formik, Form, Field } from "formik";
-import { useHistory } from 'react-router-dom';
-import { AuthContext } from '../../helpers/AuthContext';
-import { baseUrl } from '../../helpers/const';
+import { useNavigate } from 'react-router-dom';
 import * as FaIcons from 'react-icons/fa';
 import Cookies from 'js-cookie';
 import FormComponent from '../../components/Layout/FormComponent';
@@ -17,7 +15,7 @@ import Page from '../../components/Layout/Common/Page/Page';
 
 const Login: React.FC = ({}) => {
 
-    let history = useHistory();
+    let navigate = useNavigate();
     const { loginUser } = bindActionCreators(actionCreators, useDispatch());
     const isAuthenticated = useSelector(
         (state: ApplicationState) => state.auth?.isAuthenticated
@@ -26,7 +24,7 @@ const Login: React.FC = ({}) => {
     useEffect(() => {
         if (isAuthenticated) {
             const loginInitialisation = async () => {
-                history.push("/home");
+                navigate("/home");
             };
             loginInitialisation();
         }
@@ -47,7 +45,7 @@ const Login: React.FC = ({}) => {
                     onSubmit={
                         (data: LoginData) => loginSubmit(data)
                     }
-                    type="login"
+                    type="Login"
                 />
             </Page>
         </div>
