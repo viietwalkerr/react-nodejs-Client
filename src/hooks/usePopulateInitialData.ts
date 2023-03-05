@@ -24,7 +24,6 @@ const usePopulateInitialData = (): void => {
     useEffect(() => {
         fetchAllPosts();
         if (isAuthenticated && id) {
-            console.log(id);
             fetchUserData(id);
         }
         

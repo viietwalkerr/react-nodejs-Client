@@ -52,11 +52,12 @@ const App: FC = (
           <Navbar />
           <Routes>
           
-            {routes.map(({ path, component }) => {
+            {routes.map(({ path, component }, key) => {
               return (
               <Route 
                 path={path}
                 element={component}
+                key={key}
               />)
             })}
           </Routes>

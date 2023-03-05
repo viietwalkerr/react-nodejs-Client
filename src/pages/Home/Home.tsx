@@ -42,6 +42,7 @@ const Home: React.FC = ({}) => {
                 {listOfPosts?.map((value, key) => {
                     return (
                         <PostComponent 
+                            key={key}
                             index={key}
                             onClickTitle={() => {navigate(`/post/${value.id}`)}}
                             onClickBody={() => {navigate(`/post/${value.id}`)}}

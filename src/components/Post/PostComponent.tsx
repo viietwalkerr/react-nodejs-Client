@@ -45,8 +45,6 @@ const PostComponent: React.FC<PostComponentProps> = ({
     const userId = useSelector(
         (state: ApplicationState) => state.auth?.id
     );
-    // console.log(userId);
-    // console.log(likedList);
 
     return (
         <div key={index} className="post" id={`${idModifier}`}>
