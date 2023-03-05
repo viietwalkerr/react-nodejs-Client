@@ -4,6 +4,8 @@ import { Link, NavLink } from 'react-router-dom';
 import './Sidebar.scss';
 import * as FaIcons from 'react-icons/fa';
 import * as AiIcons from 'react-icons/ai';
+import { useSelector } from 'react-redux';
+import { ApplicationState } from '../../store';
 
 interface SidebarProps {
     sidebar: boolean;
@@ -17,7 +19,11 @@ const Sidebar: React.FC<SidebarProps> = ({
 
 }) => {
 
-    const SidebarData = [
+    const isAuthenticated = useSelector(
+        (state: ApplicationState) => state.auth?.accessToken
+    );
+
+    const SidebarData = isAuthenticated ? [
         {
             title: 'Home',
             path: '/Home',
@@ -48,6 +54,25 @@ const Sidebar: React.FC<SidebarProps> = ({
             icon: <AiIcons.AiOutlineQuestion />,
             cName: 'nav-text',
         },
+    ] : [
+        {
+            title: 'Home',
+            path: '/Home',
+            icon: <AiIcons.AiFillHome />,
+            cName: 'nav-text',
+        },
+        {
+            title: 'About',
+            path: '/About',
+            icon: <AiIcons.AiFillInfoCircle />,
+            cName: 'nav-text',
+        },
+        {
+            title: 'What is this?',
+            path: '/404NotFound',
+            icon: <AiIcons.AiOutlineQuestion />,
+            cName: 'nav-text',
+        }
     ]
     return (
         <nav className={sidebar ? 'sidenav active' : 'sidenav'}>

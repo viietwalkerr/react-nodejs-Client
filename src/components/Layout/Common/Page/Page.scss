@@ -1,44 +1,22 @@
 @import "../../../../styling/globalVariables";
 
 .page {
-    // .background {
-    //     color: #363534;
-    //     font-family: Helvetica;
-        // display: grid;
         width: 100%;
-       
-    //     height: 100%;
-    //     min-height: 80vh;
-    //     min-width: 500px;
-    //     grid-gap: 10px;
-        
-        // padding-left: 30px;
-        // padding-right: 30px;
-        padding: $padding-large; 
         color: $white;
         text-shadow: 0 0 10px $white,
             0 0 20px $white,
             0 0 40px $white;
-        // background: rbga(0, 0, 0, 0.7);
-        // background-color: rgba($color: #000000, $alpha: 0.7);
-    //     background-color: #f5f7fb;
-    //     background: url( ./assets/main2.jpg);
-    //     z-index: 1;
-    // }
+            
     &-content {
-        border-radius: $padding-large;
         color: white;
         text-align: center;
-        /* display: inline-flex; */
         flex-direction: row;
         flex-wrap: wrap;
         justify-content: space-evenly;
-        /* height: 500px; */
         min-height: 500px;
         padding-top: 20px;
         padding-bottom: 20px;
         background-color: rgba($color: #000000, $alpha: 0.7);
-        // opacity: 0.3;
 
         h2 {
             width: 100%;
