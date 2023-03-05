@@ -1,6 +1,5 @@
-import React, {useEffect, useState, useContext } from 'react';
+import React, { useState } from 'react';
 import * as FaIcons from 'react-icons/fa';
-// import * as AiIcons from 'react-icons/ai';
 import { Link, NavLink } from 'react-router-dom';
 import './Navbar.scss';
 import Sidebar from "../Sidebar/Sidebar";

@@ -64,15 +64,12 @@ export const actionCreators = {
     fetchAllPosts:
     (): AppThunkAction<KnownAction> => async (dispatch, getState) => {
         const appState = getState();
-        console.log("STATESTUFF: ", appState.auth);
         if (appState && appState.auth?.accessToken) {
             try {
                 const res = await axiosConfig.get(`${API}/posts`, {
                     headers: { accessToken: appState.auth.accessToken },
                 });
-                console.log("RES WEWU", res);
                 if (res?.status === 200) {
-                    console.log("RES: ",res);
                     dispatch({ 
                         type: "RECEIVE_ALL_POSTS",
                         payload: res.data.listOfPosts,
@@ -91,7 +88,6 @@ export const actionCreators = {
     fetchAllLikes:
     (): AppThunkAction<KnownAction> => async (dispatch, getState) => {
         const appState = getState();
-        console.log("FETCHING_LIKES");
         if (appState && appState.auth?.accessToken) {
             try {
                 const res = await axiosConfig.get(`${API}/posts`, {
@@ -110,7 +106,6 @@ export const actionCreators = {
     },
     fetchComments:
     (id: string): AppThunkAction<KnownAction> => async (dispatch) => {
-        console.log("FETCHING_POST_COMMENTS");
         try {
             const res = await axiosConfig.get(`${API}/comments/${id}`);
             if (res?.status === 200) {

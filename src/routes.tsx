@@ -15,68 +15,68 @@ import NotFound from './pages/NotFound/NotFound';
 
 export const routes = [
     {
-        path: "/",
+        path: "/home",
         exact: true,
-        component: Home,
+        component: <Home />,
     },
     {
         path: "/createpost",
         exact: false,
-        component: CreatePost,
+        component: <CreatePost />,
     },
     {
         path: "/post/:id",
         exact: false,
-        component: Post,
+        component: <Post />,
     },
     {
         path: "/login",
         exact: false,
-        component: Login,
+        component: <Login />,
     },
     {
         path: "/logout",
         exact: false,
-        component: Logout,
+        component: <Logout />,
     },
     {
         path: "/register",
         exact: false,
-        component: Register,
+        component: <Register />,
     },
     {
         path: "/success",
         exact: false,
-        component: Success,
+        component: <Success />,
     },
     {
         path: "/profile/:id",
         exact: false,
-        component: Profile,
+        component: <Profile />,
     },
     {
         path: "/profile/:usernameInput",
         exact: false,
-        component: Profile,
+        component: <Profile />,
     },
     {
         path: "/settings",
         exact: false,
-        component: Settings,
+        component: <Settings />,
     },
     {
         path: "/changepassword",
         exact: false,
-        component: ChangePassword,
+        component: <ChangePassword />,
     },
     {
         path: "/about",
         exact: false,
-        component: About,
+        component: <About />,
     },
     {
         path: "*",
         exact: true,
-        component: NotFound,
+        component: <NotFound />,
     },    
 ]
